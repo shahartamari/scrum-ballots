@@ -1,5 +1,3 @@
-import "materialize-css";
-import "materialize-css/dist/css/materialize.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -8,6 +6,8 @@ import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import scrum from "./reducers";
+import "materialize-css";
+import "materialize-css/dist/css/materialize.min.css";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
 import { PersistGate } from "redux-persist/integration/react";
