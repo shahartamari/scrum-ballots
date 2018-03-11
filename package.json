@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "engines" : {
+    "node": "6.11.4",
+    "npm": "5.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Shahar Tamari",
+  "license": "ISC",
+  "description": "Team voting on items"
+}
