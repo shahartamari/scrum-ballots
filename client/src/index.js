@@ -1,10 +1,9 @@
+import "materialize-css/dist/css/materialize.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./components/App";
 import registerServiceWorker from "./registerServiceWorker";
-import "materialize-css";
-import "materialize-css/dist/css/materialize.min.css";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import scrum from "./reducers";
