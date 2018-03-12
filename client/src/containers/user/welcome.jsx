@@ -15,23 +15,17 @@ class Welcome extends Component {
   render() {
     const { user, session } = this.props;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s12 m6">
-            <div className="card blue-grey white-text">
-              <span className="card-title">
-                Welcome {user ? user.name : `<unknown>`}
-              </span>
-              <div className="card-content">
-                <p>
-                  You are participating is scrum session{" "}
-                  {session ? session.id : ""}. When the Scrum master starts a
-                  voting round you will be redirected to the voting screen where
-                  you can enter your vote.
-                </p>
-              </div>
-            </div>
-          </div>
+      <div className="card blue-grey white-text">
+        <span className="card-title">
+          Welcome {user ? user.name : `<unknown>`}
+        </span>
+        <div className="card-content">
+          <p>
+            You are participating is scrum session
+            {session ? session.id : ""}. When the Scrum Master starts a voting
+            round you will be automatically shown the voting screen where you
+            can enter your vote.
+          </p>
         </div>
       </div>
     );

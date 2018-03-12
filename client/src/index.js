@@ -8,6 +8,7 @@ import { createStore } from "redux";
 import scrum from "./reducers";
 import "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+import "./css/app.css";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
 import { PersistGate } from "redux-persist/integration/react";

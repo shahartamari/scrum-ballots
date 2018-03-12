@@ -34,9 +34,8 @@ class Vote extends React.Component {
   }
 
   castVote(vote) {
-    const { socket, broadcastVote, onVote, user} = this.props;
+    const { socket, broadcastVote, onVote, user } = this.props;
     const ballot = { ...user, vote };
-    console.log("casting vote ");
 
     socket.emit("VOTE", ballot); // submit vote to session
     broadcastVote(ballot); // react to casted vote
@@ -44,18 +43,12 @@ class Vote extends React.Component {
   }
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s10 m6 l4">
-            <div className="card">
-              <div className="card-title center-align">
-                <h3>Cast Your Vote</h3>
-              </div>
-              <div className="card-action">
-                {this.renderVotePanel()}
-              </div>
-            </div>
-          </div>
+      <div className="card">
+        <div className="card-title center-align">
+          <h3>Cast Your Vote</h3>
+        </div>
+        <div className="card-action">
+          {this.renderVotePanel()}
         </div>
       </div>
     );

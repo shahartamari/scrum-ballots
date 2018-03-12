@@ -1,12 +1,14 @@
 import React from "react";
-import NewScrum from "./master/newscrum";
 import JoinScrum from "../components/joinscrum";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { join, new_session } from "../actions";
 
 const Home = ({ socket, onJoinSession }) => {
   function joinSession(name, session) {
-    const id = Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36)  ;
+    const id =
+      Math.random().toString(36).substring(2) +
+      new Date().getTime().toString(36);
     socket.emit("JOIN", {
       id,
       name,
@@ -15,13 +17,12 @@ const Home = ({ socket, onJoinSession }) => {
     onJoinSession(id, name, session);
   }
   return (
-    <div className="container">
-      <div className="section">
-        <JoinScrum handleJoin={joinSession} socket={socket} />
-      </div>
-      <h4 className="center-align"> - or -</h4>
-      <div className="section">
-        <NewScrum socket={socket} />
+    <div>
+      <JoinScrum handleJoin={joinSession} socket={socket} />
+      <div className="hide-on-small-only">
+        <div className="section">
+          <Link to="/start">I want to start my own session</Link>
+        </div>
       </div>
     </div>
   );

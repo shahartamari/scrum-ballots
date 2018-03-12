@@ -2,11 +2,6 @@
   "name": "scrum",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "/server": {
-      "target": "http://localhost:5000"
-    }
-  },
   "dependencies": {
     "crypto": "^1.0.1",
     "lodash": "^4.17.5",

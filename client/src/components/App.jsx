@@ -4,22 +4,24 @@ import Welcome from "../containers/user/welcome";
 import Master from "../containers/master/master";
 import Home from "../containers/home";
 import VoteCount from "../containers/master/voteCount";
+import NewScrum from '../containers/master/newscrum';
+import {UserLayout, MasterLayout} from './layout';
 import UserVoting from "./UserVoting";
 import io from "socket.io-client";
 
-const socket = io();
-
-class App extends React.Component {
-  
-  render() {
-   
+const socket = io(process.env.REACT_APP_SOCKET_SERVER);
+class App extends React.Component {  
+  render() {   
     return (
       <Switch>
-        <Route exact path="/" render={(routeProps)=><Home {...routeProps} socket={socket}/>} />
-        <Route path="/scrum" render={(routeProps)=><Welcome {...routeProps} socket={socket}/>} />
-        <Route path="/master" render={(routeProps)=><Master {...routeProps} socket={socket}/>} />
-        <Route path="/votecount"  render={(routeProps)=><VoteCount {...routeProps} socket={socket}/>} />
-        <Route path="/vote" render={(routeProps)=><UserVoting {...routeProps} socket={socket}/>}  />
+  
+         <Route exact path='/' render={(routeProps)=><MasterLayout><Home {...routeProps} socket={socket}/></MasterLayout>} />
+         <Route path="/start" render={(routeProps)=><MasterLayout><NewScrum {...routeProps} socket={socket} /></MasterLayout>} />
+         <Route path="/master" render={(routeProps)=><MasterLayout><Master {...routeProps} socket={socket}/></MasterLayout>} />
+         <Route path="/votecount"  render={(routeProps)=><MasterLayout><VoteCount {...routeProps} socket={socket}/></MasterLayout>} />
+        
+        <Route path="/scrum" render={(routeProps)=><UserLayout><Welcome {...routeProps} socket={socket}/></UserLayout>} />
+        <Route path="/vote" render={(routeProps)=><UserLayout><UserVoting {...routeProps} socket={socket}/></UserLayout>}  />
       </Switch>
     );
   }

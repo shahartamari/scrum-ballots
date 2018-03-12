@@ -29,8 +29,10 @@ class Master extends Component {
     });
 
     return (
-      <div className="container">
+      <div>
+      
         <h3 className="center-align">
+        
           {session.id}
         </h3>
         <h1 className="center-align">

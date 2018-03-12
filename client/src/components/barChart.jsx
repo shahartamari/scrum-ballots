@@ -56,7 +56,7 @@ class BarChart extends Component {
 
     // draw axis labels
     labels.map((elem, index) => {
-      this.drawAxisLabel(elem, index, height, config.barWidth);
+      this.drawAxisLabel(elem, index, height -1, config.barWidth);
       return elem;
     });
 
@@ -69,7 +69,6 @@ class BarChart extends Component {
     const ctx = this.context;
 
     ctx.restore();
-   //ctx.translate(config.margin, -15); // move to first rectangle position
 
     data.map((elem, index) => {
       const h = elem * w/2 + w /4; // height of bar - we want 0 to have a some height
@@ -99,7 +98,7 @@ class BarChart extends Component {
   render() {
     const { config } = this.props;
     return (
-      <div className="container">
+      <div>
         <canvas ref="canvas" width={config.width} height={config.height} />
       </div>
     );

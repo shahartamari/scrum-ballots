@@ -26,26 +26,28 @@ class JoinScrum extends Component {
           <div className="input-field">
             <input
               type="text"
+              id="sessionNumber"
               value={this.state.session}
-              className="validate"
-              placeholder="type a session number"
+              className="validate"             
               onChange={e => {
                 this.setState({ session: e.target.value });
               }}
               required
             />
+            <label htmlFor="sessionNumber">Session number to join</label>
           </div>
           <div className="input-field">
             <input
               type="text"
+              id="nickname"
               value={this.state.user}
               className="validate"
               onChange={e => {
                 this.setState({ user: e.target.value });
-              }}
-              placeholder="please enter your name"
+              }}       
               required
             />
+            <label htmlFor="nickname">Nickname</label>
           </div>
         </div>
         <div className="card-action center-align">

@@ -12,9 +12,7 @@ class NewScrum extends Component {
 
     socket.on("NEW_SESSION", data => {
       dispatch(new_session(data.session, self.state.name, self.state.secret)); // update the store
-      history.push({
-        pathname: "/master"
-      });
+      history.push("/master");
     });
   }
   createSession() {
@@ -22,27 +20,28 @@ class NewScrum extends Component {
   }
   render() {
     return (
-      <div className="card">
-        <div className="card-content">
-          <p className="section">
-            Start a new SCRUM session as a SCRUM master. Team members are then
-            able to join your session and vote on Sprint items.
-          </p>
+      <div>
+        <div className="card">
+          <div className="card-content">
+            <p className="section">
+              Start a new SCRUM session as a SCRUM master. Team members are then
+              able to join your session and vote on Sprint items.
+            </p>
 
-          <div className="input-field ">
-            <input
-              id="session-name"
-              className="validate"
-              type="text"
-              value={this.state.name}
-              onChange={e => this.setState({ name: e.target.value })}
-              required
-            />
-            <label htmlFor="session-name">Session Name</label>
-          </div>
-         
+            <div className="input-field ">
+              <input
+                id="session-name"
+                className="validate"
+                type="text"
+                value={this.state.name}
+                onChange={e => this.setState({ name: e.target.value })}
+                required
+              />
+              <label htmlFor="session-name">Session Title</label>
+            </div>
+
             <div className="switch">
-              <label className='flow-text'>
+              <label className="flow-text">
                 Open Ballots
                 <input
                   type="checkbox"
@@ -52,18 +51,18 @@ class NewScrum extends Component {
                 <span className="lever" />
                 Secret Ballots
               </label>
-
+            </div>
+            <br />
           </div>
-          <br/>
-        </div>
-        <div className="card-action center-align">
-          <a
-            className="btn wave-effect red"
-            onClick={this.createSession.bind(this)}
-            disabled = {this.state.name === ''}
-          >
-            New Scrum Session
-          </a>
+          <div className="card-action center-align">
+            <a
+              className="btn wave-effect red"
+              onClick={this.createSession.bind(this)}
+              disabled={this.state.name === ""}
+            >
+              New Scrum Session
+            </a>
+          </div>
         </div>
       </div>
     );

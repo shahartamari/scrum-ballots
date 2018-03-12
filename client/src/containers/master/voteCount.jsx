@@ -32,10 +32,13 @@ class VoteCount extends Component {
   }
   getBarChartData(votes) {
     const labels = [0, 1, 3, 5, 8, 13, 21];
+    const baseWidth = window.innerWidth > 1024 ? window.innerWidth / 25 : window.innerWidth / 12;
+    console.log(window.innerWidth);
+    console.log(baseWidth);
     return {
       config: {
-        barWidth: 50,
-        margin: 35,
+        barWidth: baseWidth,
+        margin: baseWidth * .6,
         colors: [
           "#37474f",
           "#ab47bc",
@@ -64,7 +67,7 @@ class VoteCount extends Component {
     config.height = (1 + users.length) * config.barWidth * 1.4; // allow enough height so that max value is at 80% height
 
     return (
-      <div className="container">
+      <div>
         <div className="card center-align">
           <div className="card-title h1 ">Vote Count</div>
           <div className="card-content" />
