@@ -7,7 +7,7 @@ import VoteCount from "../containers/master/voteCount";
 import UserVoting from "./UserVoting";
 import io from "socket.io-client";
 
-const socket = io("/server");
+const socket = io();
 
 class App extends React.Component {
   
