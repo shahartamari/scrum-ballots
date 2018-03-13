@@ -5,7 +5,7 @@ import { resetVote, reset } from "../../actions";
 
 class Welcome extends Component {
   componentDidMount() {
-    const { socket, history, onEnter, user, onLeav, session } = this.props;
+    const { socket, history, onEnter, user, onLeave, session } = this.props;
     if (!session || !session.id) {
       history.replace('/');
     }
