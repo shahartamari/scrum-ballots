@@ -2,7 +2,8 @@ import {
   JOIN,
   VOTE,
   NEW_SESSION,
-  RESET_VOTES
+  RESET_VOTES, 
+  RESET
 } from "./types";
 
 export const join = (id, name) => {
@@ -17,3 +18,7 @@ export const new_session = (session, name, secret) => {
 export const resetVote = () => {
   return { type: RESET_VOTES };
 };
+
+export const reset = () => {
+  return {type: RESET}
+}

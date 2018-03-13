@@ -1,4 +1,4 @@
-import { JOIN, NEW_SESSION } from "../actions/types";
+import { JOIN, NEW_SESSION, RESET } from "../actions/types";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -9,10 +9,10 @@ export default (state = [], action) => {
         }),
         action
       ];
-    case NEW_SESSION: {
-      state = [];
-      return state; // clear voter list on new session
-    }
+    case RESET:
+    case NEW_SESSION:
+      return []; // clear voter list on new session
+
     default:
       return state;
   }

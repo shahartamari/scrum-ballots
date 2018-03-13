@@ -1,4 +1,4 @@
-import { VOTE, RESET_VOTES, NEW_SESSION } from "../actions/types";
+import { VOTE, RESET_VOTES, NEW_SESSION, RESET } from "../actions/types";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -6,8 +6,8 @@ export default (state = [], action) => {
       return [...state.filter(e=>{return e.voteCast.id !== action.voteCast.id}), action];
     case RESET_VOTES:
     case NEW_SESSION:
-      state = [];
-      return state;
+    case RESET:
+      return [];
     default:
       return state;
   }

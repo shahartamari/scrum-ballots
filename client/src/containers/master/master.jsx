@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { join, resetVote } from "../../actions";
+import * as actions from "../../actions";
 
 class Master extends Component {
+  componentWillMount() {
+    const {session, history} = this.props;
+    // check if we are connected to a session
+    // this prevents the user from coming here by typing the URL
+    if (!session || !session.id) {
+      history.replace('/start');
+    }
+  }
   componentDidMount() {
     const { socket, onJoin, onReset } = this.props;
     socket.on("HANDLE_JOIN", data => {
@@ -17,8 +25,9 @@ class Master extends Component {
     socket.emit("START_VOTE");
   }
   endSession() {
-    const { socket, session, history } = this.props;
+    const { socket, session, history, onEnd } = this.props;
     socket.emit("END", session.id);
+    onEnd();
     history.push("/start");
   }
   render() {
@@ -74,10 +83,13 @@ const mapStateToProps = ({ users, session }) => {
 const mapDispatchToProps = dispatch => {
   return {
     onJoin: (id, name) => {
-      dispatch(join(id, name));
+      dispatch(actions.join(id, name));
     },
     onReset: () => {
-      dispatch(resetVote());
+      dispatch(actions.resetVote());
+    }, 
+    onEnd: () => {
+      dispatch(actions.reset());
     }
   };
 };
