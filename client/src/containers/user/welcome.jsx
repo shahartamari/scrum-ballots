@@ -17,14 +17,15 @@ class Welcome extends Component {
     return (
       <div className="card blue-grey white-text">
         <span className="card-title">
-          Welcome {user ? user.name : `<unknown>`}
+      
         </span>
-        <div className="card-content">
+        <div className="card-content flow-text">
+        <h4 className=''>Welcome {user ? user.name : `<unknown>`}</h4>
+        <div className='divider' />
           <p>
-            You are participating is scrum session
-            {session ? session.id : ""}. When the Scrum Master starts a voting
-            round you will be automatically shown the voting screen where you
-            can enter your vote.
+            You are participating is scrum session&nbsp;
+            {session ? session.id : ""}. <br />When the Scrum Master starts a voting
+            round you will be able to cast your vote.
           </p>
         </div>
       </div>

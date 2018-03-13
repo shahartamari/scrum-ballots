@@ -1,8 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { vote } from "../../actions";
 
 class Vote extends React.Component {
+  componentWillMount() {
+    const { votes, history } = this.props;
+    if (votes.length > 0) {
+      history.push("/scrum");
+    }
+  }
   renderVoteButton(value, index) {
     return (
       <div className="col s4 center-align" key={index}>
@@ -54,12 +61,12 @@ class Vote extends React.Component {
     );
   }
 }
-const mapStateToProps = ({ users, session }) => {
-  return { user: users.length > 0 ? users[0] : null, session };
+const mapStateToProps = ({ votes, users, session }) => {
+  return { votes, user: users.length > 0 ? users[0] : null, session };
 };
 const mapDispatchToProps = dispatch => {
   return {
     onVote: voteCast => dispatch(vote(voteCast))
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Vote));

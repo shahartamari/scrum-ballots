@@ -1,7 +1,9 @@
 import React from "react";
+import BarChart from './barChart';
 
-const Voted = ({ userVote }) => {
-  return (
+const Voted = ({ socket, userVote,data, unitHeight }) => {
+
+  return (  
 
       <div className="card center-align">
         <div className="card-title">
@@ -19,7 +21,16 @@ const Voted = ({ userVote }) => {
             </div>
           </div>
         </div>
+        <BarChart
+            width={500}
+            unitHeight={unitHeight}
+            data = {data}
+            socket = {socket}
+            labels = {[0, 1, 3, 5, 8, 13, 21]}
+          />
       </div>
+      
+
   );
 };
 
