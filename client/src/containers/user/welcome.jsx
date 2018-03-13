@@ -5,7 +5,10 @@ import { resetVote, reset } from "../../actions";
 
 class Welcome extends Component {
   componentDidMount() {
-    const { socket, history, onEnter, user, onLeave } = this.props;
+    const { socket, history, onEnter, user, onLeav, session } = this.props;
+    if (!session || !session.id) {
+      history.replace('/');
+    }
     socket.on("START", () => {
       // show the vote screen when scrum master pushed start voting button
       history.replace("/vote");
