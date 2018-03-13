@@ -5,10 +5,15 @@ import { resetVote } from "../../actions";
 
 class Welcome extends Component {
   componentDidMount() {
-    const { socket, history, onEnter } = this.props;
+    const { socket, history, onEnter, user } = this.props;
     socket.on("START", () => {
       // show the vote screen when scrum master pushed start voting button
       history.replace("/vote");
+    });
+    socket.on("END_SESSION", session => {
+      console.log(session);
+      socket.emit("LEAVE", { user, session });
+      history.push("/");
     });
     onEnter();
   }
@@ -16,16 +21,16 @@ class Welcome extends Component {
     const { user, session } = this.props;
     return (
       <div className="card blue-grey white-text">
-        <span className="card-title">
-      
-        </span>
+        <span className="card-title" />
         <div className="card-content flow-text">
-        <h4 className=''>Welcome {user ? user.name : `<unknown>`}</h4>
-        <div className='divider' />
+          <h4 className="">
+            Welcome {user ? user.name : `<unknown>`}
+          </h4>
+          <div className="divider" />
           <p>
             You are participating is scrum session&nbsp;
-            {session ? session.id : ""}. <br />When the Scrum Master starts a voting
-            round you will be able to cast your vote.
+            {session ? session.id : ""}. <br />When the Scrum Master starts a
+            voting round you will be able to cast your vote.
           </p>
         </div>
       </div>

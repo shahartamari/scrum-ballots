@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom';
+import { Link, withRouter } from "react-router-dom";
 import { join, resetVote } from "../../actions";
 
 class Master extends Component {
@@ -16,11 +16,16 @@ class Master extends Component {
     const { socket } = this.props;
     socket.emit("START_VOTE");
   }
+  endSession() {
+    const { socket, session, history } = this.props;
+    socket.emit("END", session.id);
+    history.push("/start");
+  }
   render() {
     const { users, session } = this.props;
     const userList = users.map(user => {
       return (
-        <div className="chip z-depth-3" key={user.id} style={{margin: 20}}>
+        <div className="chip z-depth-3" key={user.id} style={{ margin: 20 }}>
           <span style={{ fontSize: 18 }}>
             {user.name}
           </span>
@@ -30,14 +35,12 @@ class Master extends Component {
 
     return (
       <div>
-      
-        <h3 className="center-align">
-        
-          {session.id}
-        </h3>
         <h1 className="center-align">
-          {session.name}
+          {session.id}
         </h1>
+        <h3 className="center-align">
+          {session.name}
+        </h3>
         <div className="card ">
           <div className="card-content blue-grey darken-2">
             {userList}
@@ -50,6 +53,13 @@ class Master extends Component {
             >
               <i className="material-icons right">play_arrow</i> START VOTING
             </Link>
+            <a
+              className="btn-floating left large blue-grey lighten-3"
+              title="End Session"
+              onClick={this.endSession.bind(this)}
+            >
+              <i className="material-icons">close</i>
+            </a>
           </div>
         </div>
       </div>
@@ -67,9 +77,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(join(id, name));
     },
     onReset: () => {
-      dispatch(resetVote())
+      dispatch(resetVote());
     }
-
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Master);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Master));

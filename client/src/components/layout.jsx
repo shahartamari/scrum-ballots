@@ -4,12 +4,13 @@ export const MasterLayout = ({ children, ...rest }) => {
   return (
     <div className="container row">
       <div className="col m12 l10 push-l1">
-        <div className="grey darken-4 valign-wrapper">
+        <div className=" valign-wrapper">
           <img
             className="responsive-img"
             alt="banner"
             src="image/scrum banner.png"
           />
+          <div className="background-grad" />
         </div>
         {children}
       </div>

@@ -4,3 +4,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.background-grad {
+  height: 150px;
+  width: 100%;
+  /* background: linear-gradient(to bottom right, black, #9e9e9e); */
+  background: radial-gradient(farthest-corner at 90% 98%, #ffa000, #727272, black, #333, black, black, black);
+}

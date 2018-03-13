@@ -41,6 +41,10 @@ io.on("connection", socket => {
       );
     }
   });
+  socket.on("LEAVE", data => {
+    console.log(data.user.name + " is leaving session " + data.session);
+    socket.leave(data.session);
+  });
   socket.on("TALLY", data => {
     socket.broadcast.emit("HANDLE_TALLY", data);
   });
@@ -53,6 +57,11 @@ io.on("connection", socket => {
   });
   socket.on("STOP_VOTE", () => {
     socket.broadcast.emit("STOP_VOTE"); // send voters back to welcome screen
+  });
+  socket.on("END", session => {
+    console.log("ending session " + session);
+    socket.broadcast.emit("END_SESSION", session);
+    socket.leave(session);
   });
   socket.on("CREATE", () => {
     // generate room number as rand 6 digit number
