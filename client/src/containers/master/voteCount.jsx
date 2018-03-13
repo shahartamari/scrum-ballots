@@ -27,13 +27,11 @@ class VoteCount extends Component {
     return (
       <div>
         <div className="card center-align">
-          <div className="card-title h1 ">Vote Count</div>
-          <div className="card-content" ref="parent" />
-          <p>
-            <span>
+          <div className="card-title"><span>
               {votes.length} of {users.length} team members voted
-            </span>
-          </p>
+            </span></div>
+          <div className="card-content" ref="parent" />
+         
           {session.hiddenBallots ? <span /> : <Ballots votes={votes} />}
           <BarChart
             width={500}
