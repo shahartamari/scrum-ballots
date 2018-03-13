@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { resetVote } from "../../actions";
+import { resetVote, reset } from "../../actions";
 
 class Welcome extends Component {
   componentDidMount() {
@@ -44,7 +44,8 @@ const mapStateToProps = ({ users, session }) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onEnter: () => dispatch(resetVote())
+    onEnter: () => dispatch(resetVote()), 
+    onLeave: () => dispatch(reset())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(
