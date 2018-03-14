@@ -2,22 +2,20 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "express": "^4.16.2",
+    "nodemon": "^1.17.2",
+    "react-scripts": "^1.1.1",
     "socket.io": "^2.0.4"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "app.js",
-  "engines" : {
-    "node": "6.11.4",
-    "npm": "5.0.3"
-  },
   "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-    },
+  },
   "author": "Shahar Tamari",
   "license": "ISC",
   "description": "Team voting on items"
