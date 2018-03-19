@@ -23,3 +23,9 @@
     
   );
 }
+nav ul a {
+  display: inline-block; /* works better in IE */
+}
+.btn-flat {
+  color: #039be5;
+}

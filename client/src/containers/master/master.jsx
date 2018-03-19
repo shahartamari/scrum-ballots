@@ -5,11 +5,15 @@ import * as actions from "../../actions";
 
 class Master extends Component {
   componentWillMount() {
-    const {session, history} = this.props;
+    const {session, history, profile} = this.props;
     // check if we are connected to a session
     // this prevents the user from coming here by typing the URL
     if (!session || !session.id) {
       history.replace('/start');
+    }
+    // disallow if not logged in
+    if (!profile) {
+      history.replace('/');
     }
   }
   componentDidMount() {

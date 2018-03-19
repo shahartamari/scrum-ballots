@@ -15,7 +15,6 @@ class App extends React.Component {
   render() {   
     return (
       <Switch>
-  
          <Route exact path='/' render={(routeProps)=><MasterLayout><Home {...routeProps} socket={socket}/></MasterLayout>} />
          <Route path="/start" render={(routeProps)=><MasterLayout><NewScrum {...routeProps} socket={socket} /></MasterLayout>} />
          <Route path="/master" render={(routeProps)=><MasterLayout><Master {...routeProps} socket={socket}/></MasterLayout>} />

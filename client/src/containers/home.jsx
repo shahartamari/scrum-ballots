@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { join, new_session } from "../actions";
 
 const Home = ({ socket, onJoinSession, profile, session }) => {
-  
+
   function joinSession(name, session) {
     const id =
       Math.random().toString(36).substring(2) +
@@ -17,12 +17,14 @@ const Home = ({ socket, onJoinSession, profile, session }) => {
     });
     onJoinSession(id, name, session);
   }
+  const disabled = profile ? '' : 'disabled';
+
   return (
     <div>
       <JoinScrum handleJoin={joinSession} socket={socket} profile={profile} />
       <div className="hide-on-small-only">
         <div className="section">
-          <Link to="/start">I want to start my own session</Link>
+          <Link to="/start" className={'btn-flat ' + disabled}>I want to start a new session</Link>
         </div>
       </div>
     </div>

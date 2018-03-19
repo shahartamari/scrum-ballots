@@ -6,7 +6,8 @@ import {
   NEW_SESSION,
   RESET_VOTES,
   RESET,
-  CURRENT_PROFILE
+  CURRENT_PROFILE,
+  LOGOUT
 } from "./types";
 
 export const join = (id, name) => {
@@ -27,7 +28,10 @@ export const reset = () => async dispatch => {
   dispatch({ type: RESET, payload: res.data });
 };
 
+export const logout = () => {
+  return {type: LOGOUT};
+}
 export const currentUser = () => async dispatch => {
   const res = await axios.get("/api/getUser");
-  dispatch({ type: CURRENT_PROFILE, profile: res.data });
+  dispatch({ type: CURRENT_PROFILE, profile: (res.data === '') ? null : res.data });
 };

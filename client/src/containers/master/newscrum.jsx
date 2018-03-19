@@ -6,7 +6,7 @@ import { new_session} from "../../actions";
 class NewScrum extends Component {
   constructor(props) {
     super(props);
-    const { history, socket } = this.props;
+    const { history, socket, profile } = this.props;
     const self = this;
     this.state = { name: "", secrect: false };
 
@@ -14,6 +14,9 @@ class NewScrum extends Component {
       this.props.new_session(data.session, self.state.name, self.state.secret); // update the store
       history.push("/master");
     });
+    if (!profile) {
+      history.replace('/');
+    }
   }
   
   createSession() {
@@ -74,4 +77,5 @@ const mapDispatchToProps = dispatch => {
     new_session: (session, name, secret) => new_session(session, name, secret)
   }
 }
-export default withRouter(connect(null, mapDispatchToProps)(NewScrum));
+
+export default withRouter(connect(({profile}) => {return {profile}}, mapDispatchToProps)(NewScrum));

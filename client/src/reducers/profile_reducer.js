@@ -4,8 +4,7 @@ export default (state = null, action) => {
   switch (action.type) {
     case CURRENT_PROFILE:
       return action.profile;
-    case RESET:
-   
+    case RESET:   
       return null;
     default:
       return state;

@@ -1,44 +1,70 @@
 import React from "react";
 import { connect } from "react-redux";
-import Login from "./login";
-import { reset } from "../actions";
+import { withRouter } from "react-router";
+import * as actions from "../actions";
 
-const Menu = profile => {   
-  if (profile && profile.name) {
+const Menu = (profile) => {
+  if (profile) {
     return (
       <a className="dropdown-button" href="#!" data-activates="user-menu">
-        {profile.name.givenName + " " + profile.name.familyName}
+        <span>
+          {profile.name.givenName + " " + profile.name.familyName}
+        </span>
         <i className="material-icons right">arrow_drop_down</i>
       </a>
     );
   } else {
-    return <Login />;
+    return (
+      <span>
+        <a href="/login" onClick={() => this.setState({isAuth: true})}>Login</a>
+      </span>
+    );
   }
 };
-const UserMenu = ({ profile, dispatch }) => {
-  return (
-    <div>
-      <ul id="user-menu" className="dropdown-content">
-        <li>
-          <a onClick={() => dispatch(reset())}>Logout</a>
-        </li>
-      </ul>
-      <nav>
-        <div className="nav-wrapper blue-grey darken-3">
-          <a href="#!" className="left" style={{ paddingLeft: 20 }}>
-            SCRUM BALLOTS
-          </a>
-          <ul className="right">
-           <li>
-              {Menu(profile)}
+class UserMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    props.dispatch(actions.currentUser());
+    this.state = { isAuth: props.profile != null };
+  }
+ 
+  componentDidUpdate() {
+    const { session, history, dispatch } = this.props;
+    const { path } = session;
+    if (path) {
+      // time to logout
+      this.setState({ isAuth: false });
+      dispatch(actions.logout()); // clear the path
+      history.replace({ pathName: path });
+    }
+  }
+  render() {
+    const { profile, dispatch } = this.props;
+
+    return (
+      <div>
+        <ul id="user-menu" className="dropdown-content">
+          <li>
+            <a onClick={() => dispatch(actions.reset())}>Logout</a>
           </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  );
+        </ul>
+        <nav>
+          <div className="nav-wrapper blue-grey darken-3">
+            <a href="#!" className="left" style={{ paddingLeft: 20 }}>
+              SCRUM BALLOTS
+            </a>
+            <ul className="right">
+              <li>
+                {Menu(profile)}
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    );
+  }
+}
+const mapStateToProps = ({ profile, session }) => {
+  return { profile, session };
 };
-const mapStateToProps = ({ profile }) => {
-  return { profile };
-};
-export default connect(mapStateToProps)(UserMenu);
+export default withRouter(connect(mapStateToProps)(UserMenu));

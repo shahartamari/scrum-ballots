@@ -3,17 +3,15 @@ import UserMenu from "../containers/UserMenu";
 
 export const MasterLayout = ({ children, ...rest }) => {
   return (
-    <div className="container row ">
-      <div className="col m12 l10 push-l1">
+    <div className="container row">
+      <div className="col m12 l10">
         <UserMenu />
-        <div className="valign-wrapper">
+        <div className="my-deep-orange-fade banner">
           <img
             className="materialboxed"
             alt="banner"
             src="image/scrummy.png"
           />
-        
-          <div className="banner my-deep-orange-fade" />
         </div>
 
         {children}
