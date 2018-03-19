@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { join, new_session } from "../actions";
 
-const Home = ({ socket, onJoinSession }) => {
+const Home = ({ socket, onJoinSession, profile, session }) => {
+  
   function joinSession(name, session) {
     const id =
       Math.random().toString(36).substring(2) +
@@ -18,7 +19,7 @@ const Home = ({ socket, onJoinSession }) => {
   }
   return (
     <div>
-      <JoinScrum handleJoin={joinSession} socket={socket} />
+      <JoinScrum handleJoin={joinSession} socket={socket} profile={profile} />
       <div className="hide-on-small-only">
         <div className="section">
           <Link to="/start">I want to start my own session</Link>
@@ -27,6 +28,9 @@ const Home = ({ socket, onJoinSession }) => {
     </div>
   );
 };
+const mapStateToProps = ({profile, session}) => {
+  return {profile, session};
+}
 const mapDispatchToProps = dispatch => {
   return {
     onJoinSession: (id, name, session) => {
@@ -35,4 +39,4 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

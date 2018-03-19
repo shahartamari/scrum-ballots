@@ -4,9 +4,16 @@ import { withRouter } from "react-router-dom";
 class JoinScrum extends Component {
   constructor(props) {
     super(props);
-    const { history, socket } = this.props;
+    const { history, socket, profile } = this.props;
     const self = this;
-    this.state = { user: "", session: "", errorMessage: "" };
+    this.state = {
+      user:
+        profile && profile.name
+          ? `${profile.name.givenName} ${profile.name.familyName}`
+          : '',
+      session: "",
+      errorMessage: ""
+    };
 
     socket.on("WELCOME", () => {
       history.push("/scrum");
@@ -14,6 +21,16 @@ class JoinScrum extends Component {
     socket.on("JOIN_FAILED", function(data) {
       self.setState({ errorMessage: data.description });
     });
+  }
+  componentDidUpdate() {
+    const { profile } = this.props;
+    const displayName =
+      profile && profile.name
+        ? `${profile.name.givenName} ${profile.name.familyName}`
+        : '';
+    if (displayName !== this.state.user) {
+      this.setState({ user: displayName });
+    }
   }
   onJoinClick() {
     this.props.handleJoin(this.state.user, this.state.session); // push join user action
@@ -28,7 +45,7 @@ class JoinScrum extends Component {
               type="text"
               id="sessionNumber"
               value={this.state.session}
-              className="validate"             
+              className="validate"
               onChange={e => {
                 this.setState({ session: e.target.value });
               }}
@@ -44,7 +61,7 @@ class JoinScrum extends Component {
               className="validate"
               onChange={e => {
                 this.setState({ user: e.target.value });
-              }}       
+              }}
               required
             />
             <label htmlFor="nickname">Nickname</label>

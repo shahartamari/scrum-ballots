@@ -1,15 +1,18 @@
+import axios from "axios";
+
 import {
   JOIN,
   VOTE,
   NEW_SESSION,
-  RESET_VOTES, 
-  RESET
+  RESET_VOTES,
+  RESET,
+  CURRENT_PROFILE
 } from "./types";
 
 export const join = (id, name) => {
   return { type: JOIN, id, name };
 };
-export const vote = (voteCast) => {
+export const vote = voteCast => {
   return { type: VOTE, voteCast };
 };
 export const new_session = (session, name, secret) => {
@@ -19,6 +22,12 @@ export const resetVote = () => {
   return { type: RESET_VOTES };
 };
 
-export const reset = () => {
-  return {type: RESET}
-}
+export const reset = () => async dispatch => {
+  const res = await axios.get("/api/logout"); 
+  dispatch({ type: RESET, payload: res.data });
+};
+
+export const currentUser = () => async dispatch => {
+  const res = await axios.get("/api/getUser");
+  dispatch({ type: CURRENT_PROFILE, profile: res.data });
+};

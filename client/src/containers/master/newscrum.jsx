@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { new_session } from "../../actions";
+import { new_session} from "../../actions";
 
 class NewScrum extends Component {
   constructor(props) {
     super(props);
-    const { history, dispatch, socket } = this.props;
+    const { history, socket } = this.props;
     const self = this;
     this.state = { name: "", secrect: false };
 
     socket.on("NEW_SESSION", data => {
-      dispatch(new_session(data.session, self.state.name, self.state.secret)); // update the store
+      this.props.new_session(data.session, self.state.name, self.state.secret); // update the store
       history.push("/master");
     });
   }
+  
   createSession() {
     this.props.socket.emit("CREATE");
   }
@@ -68,5 +69,9 @@ class NewScrum extends Component {
     );
   }
 }
-
-export default withRouter(connect(null)(NewScrum));
+const mapDispatchToProps = dispatch => {
+  return {
+    new_session: (session, name, secret) => new_session(session, name, secret)
+  }
+}
+export default withRouter(connect(null, mapDispatchToProps)(NewScrum));

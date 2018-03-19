@@ -1,17 +1,21 @@
 import React from "react";
+import UserMenu from "../containers/UserMenu";
 
 export const MasterLayout = ({ children, ...rest }) => {
   return (
-    <div className="container row">
+    <div className="container row ">
       <div className="col m12 l10 push-l1">
-        <div className=" valign-wrapper">
+        <UserMenu />
+        <div className="valign-wrapper">
           <img
-            className="responsive-img"
+            className="materialboxed"
             alt="banner"
-            src="image/scrum banner.png"
+            src="image/scrummy.png"
           />
-          <div className="background-grad" />
+        
+          <div className="banner my-deep-orange-fade" />
         </div>
+
         {children}
       </div>
 

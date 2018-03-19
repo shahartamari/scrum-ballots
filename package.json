@@ -1,13 +1,19 @@
 {
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "method-override": "^2.3.10",
+    "passport": "^0.4.0",
+    "passport-azure-ad": "^3.0.12",
     "socket.io": "^2.0.4"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "app.js",
-  "engines" : {
+  "engines": {
     "node": "6.11.4",
     "npm": "5.0.3"
   },
@@ -17,8 +23,8 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-    },
+  },
   "author": "Shahar Tamari",
   "license": "ISC",
-  "description": "Team voting on items"
+  "description": "Team voting on sprint items"
 }
