@@ -9,7 +9,10 @@ import {UserLayout, MasterLayout} from './layout';
 import UserVoting from "./UserVoting";
 import io from "socket.io-client";
 
-const socket = io(process.env.REACT_APP_SOCKET_SERVER);
+const port = process.env.PORT || 5000; // server port
+const server = process.env.URL || 'localhost';
+
+const socket = io(`${server}:${port}`);
 class App extends React.Component {  
  
   render() {   
