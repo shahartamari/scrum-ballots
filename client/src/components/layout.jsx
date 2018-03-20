@@ -8,7 +8,7 @@ export const MasterLayout = ({ children, ...rest }) => {
         <UserMenu />
         <div className="my-deep-orange-fade banner">
           <img
-            className="materialboxed"
+            className="responsive-img"
             alt="banner"
             src="image/scrummy.png"
           />

@@ -17,9 +17,6 @@ module.exports = {
 
   url: process.env.HOST,
 
-  // Required, the reply URL registered in AAD for your app
-  redirectUrl: process.env.REDIRECT_URL,
-
   // Required if we use http for redirectUrl
   allowHttpForRedirectUrl: false,
 
