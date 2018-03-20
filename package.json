@@ -15,7 +15,7 @@
   "main": "app.js",
   "engines": {
     "node": "6.11.4",
-    "npm": "5.0.3"
+    "npm": "5.6.0"
   },
   "devDependencies": {},
   "scripts": {
