@@ -55,7 +55,7 @@ app.post('/auth/openid/return',
   app.get("/api/logout", function(req, res) {
     req.session.destroy(function(err) {
       req.logOut();
-      res.send("https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=" + req.get('host') );
+      res.send("https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=" + keys.url );
     // res.redirect('/');
     });
   });
