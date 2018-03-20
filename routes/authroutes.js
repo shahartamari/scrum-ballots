@@ -2,7 +2,7 @@ const passport = require("passport");
 const keys = require("../config/keys");
 
 module.exports = app => {
-  app.get('/login',
+  app.get('/api/login',
   function(req, res, next) {
     console.log('trying to authenticate');
     passport.authenticate('azuread-openidconnect', 

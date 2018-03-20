@@ -24,7 +24,7 @@ class UserMenu extends React.Component {
     } else {
       return (
         <span>
-          <a href="/login" onClick={this.onClick.bind(this)}>Login</a>
+          <a href="/api/login" onClick={this.onClick.bind(this)}>Login</a>
         </span>
       );
     }
