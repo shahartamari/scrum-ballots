@@ -4,13 +4,10 @@ import { withRouter } from "react-router-dom";
 class JoinScrum extends Component {
   constructor(props) {
     super(props);
-    const { history, socket, profile } = this.props;
+    const { history, socket } = this.props;
     const self = this;
     this.state = {
-      user:
-        profile && profile.name
-          ? `${profile.name.givenName} ${profile.name.familyName}`
-          : '',
+      user: "",
       session: "",
       errorMessage: ""
     };
@@ -24,14 +21,15 @@ class JoinScrum extends Component {
   }
   componentDidUpdate() {
     const { profile } = this.props;
-    const displayName =
-      profile && profile.name
-        ? `${profile.name.givenName} ${profile.name.familyName}`
-        : '';
-    if (displayName !== this.state.user) {
-      this.setState({ user: displayName });
+
+    if (profile && profile.name) {
+      const displayName = `${profile.name.givenName} ${profile.name.familyName}`;
+      if (displayName !== this.state.user) {
+        this.setState({ user: displayName });
+      }
     }
   }
+
   onJoinClick() {
     this.props.handleJoin(this.state.user, this.state.session); // push join user action
   }

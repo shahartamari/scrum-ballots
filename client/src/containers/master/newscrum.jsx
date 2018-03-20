@@ -1,26 +1,33 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { new_session} from "../../actions";
+import { newSession } from "../../actions";
 
 class NewScrum extends Component {
   constructor(props) {
     super(props);
-    const { history, socket, profile } = this.props;
-    const self = this;
-    this.state = { name: "", secrect: false };
 
+    this.state = { name: "", secret: false };
+  }
+  componentWillMount() {
+    const { profile, history, socket } = this.props;
+    if (!profile) {
+      history.replace("/");
+    }
+    const self = this;
     socket.on("NEW_SESSION", data => {
-      this.props.new_session(data.session, self.state.name, self.state.secret); // update the store
+      this.props.dispatch(
+        newSession(data.session, self.state.name, self.state.secret)
+      ); // update the store
       history.push("/master");
     });
-    if (!profile) {
-      history.replace('/');
-    }
   }
-  
+  componentWillUnmount() {
+    const { socket } = this.props;
+    socket.off("NEW_SESSION");
+  }
   createSession() {
-    this.props.socket.emit("CREATE");
+    this.props.socket.emit("CREATE"); // send message to server to start session
   }
   render() {
     return (
@@ -72,10 +79,7 @@ class NewScrum extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    new_session: (session, name, secret) => new_session(session, name, secret)
-  }
-}
-
-export default withRouter(connect(({profile}) => {return {profile}}, mapDispatchToProps)(NewScrum));
+const mapStateToPros = ({ profile }) => {
+  return { profile };
+};
+export default withRouter(connect(mapStateToPros)(NewScrum));

@@ -3,31 +3,35 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actions from "../actions";
 
-const Menu = (profile) => {
-  if (profile) {
-    return (
-      <a className="dropdown-button" href="#!" data-activates="user-menu">
-        <span>
-          {profile.name.givenName + " " + profile.name.familyName}
-        </span>
-        <i className="material-icons right">arrow_drop_down</i>
-      </a>
-    );
-  } else {
-    return (
-      <span>
-        <a href="/login" onClick={() => this.setState({isAuth: true})}>Login</a>
-      </span>
-    );
-  }
-};
+
+
 class UserMenu extends React.Component {
   constructor(props) {
     super(props);
     props.dispatch(actions.currentUser());
     this.state = { isAuth: props.profile != null };
   }
- 
+  Menu(profile) {
+    if (profile) {
+      return (
+        <a className="dropdown-button" href="#!" data-activates="user-menu">
+          <span>
+            {profile.name.givenName + " " + profile.name.familyName}
+          </span>
+          <i className="material-icons right">arrow_drop_down</i>
+        </a>
+      );
+    } else {
+      return (
+        <span>
+          <a href="/login" onClick={this.onClick.bind(this)}>Login</a>
+        </span>
+      );
+    }
+  };
+  onClick (e) {
+    this.setState({isAuth: true});
+  }
   componentDidUpdate() {
     const { session, history, dispatch } = this.props;
     const { path } = session;
@@ -55,7 +59,7 @@ class UserMenu extends React.Component {
             </a>
             <ul className="right">
               <li>
-                {Menu(profile)}
+                {this.Menu(profile)}
               </li>
             </ul>
           </div>

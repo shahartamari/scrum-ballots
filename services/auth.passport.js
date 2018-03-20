@@ -78,7 +78,7 @@ passport.use(
       }
       // asynchronous verification, for effect...
       process.nextTick(function() {
-        console.log(profile);        
+         
         findByOid(profile.oid, function(err, user) {
           if (err) {
             return done(err);

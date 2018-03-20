@@ -6,12 +6,16 @@ import { vote } from "../../actions";
 import BarChart from "../../components/barChart";
 
 class VoteCount extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { dispatch, socket } = this.props;
     socket.on("HANDLE_VOTE", data => {
       dispatch(vote(data)); // update the store with cast vote
     });
     
+  }
+  componentWillUnmount() {
+    const {socket} = this.props;
+    socket.off("HANDLE_VOTE"); // turn off event listener to pervent mounting multiple listeners
   }
   render() {
     const { votes, users, session, socket } = this.props;

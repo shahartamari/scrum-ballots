@@ -16,7 +16,7 @@ export const join = (id, name) => {
 export const vote = voteCast => {
   return { type: VOTE, voteCast };
 };
-export const new_session = (session, name, secret) => {
+export const newSession = (session, name, secret) => {  
   return { type: NEW_SESSION, session, name, secret };
 };
 export const resetVote = () => {
@@ -24,14 +24,17 @@ export const resetVote = () => {
 };
 
 export const reset = () => async dispatch => {
-  const res = await axios.get("/api/logout"); 
+  const res = await axios.get("/api/logout");
   dispatch({ type: RESET, payload: res.data });
 };
 
 export const logout = () => {
-  return {type: LOGOUT};
-}
+  return { type: LOGOUT };
+};
 export const currentUser = () => async dispatch => {
   const res = await axios.get("/api/getUser");
-  dispatch({ type: CURRENT_PROFILE, profile: (res.data === '') ? null : res.data });
+  dispatch({
+    type: CURRENT_PROFILE,
+    profile: res.data === "" ? null : res.data
+  });
 };

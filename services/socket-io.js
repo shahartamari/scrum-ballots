@@ -4,7 +4,9 @@ const crypto = require("crypto");
 module.exports = server => {
   // io socket messages
   const io = socket(server);
+  
   io.on("connection", socket => {
+    console.log("socket created");
     socket.on("JOIN", data => {
       if (io.nsps["/"].adapter.rooms[data.session]) {
         socket.join(data.session, () => {

@@ -7,6 +7,7 @@ class Vote extends React.Component {
   componentWillMount() {
     const { votes, history } = this.props;
     if (votes.length > 0) {
+      // prevent double voting
       history.push("/scrum");
     }
   }

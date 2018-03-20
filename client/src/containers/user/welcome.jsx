@@ -14,13 +14,18 @@ class Welcome extends Component {
       history.replace("/vote");
     });
     socket.on("END_SESSION", session => {
-      console.log(session);
       socket.emit("LEAVE", { user, session });
       onLeave();
       history.push("/");
     });
     onEnter();
   }
+  componentWillUnmount() {
+    const {socket} = this.props;
+    socket.off("START");
+    socket.off("END_SESION");
+  }
+  
   render() {
     const { user, session } = this.props;
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import JoinScrum from "../components/joinscrum";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { join, new_session } from "../actions";
+import { join, newSession } from "../actions";
 
 const Home = ({ socket, onJoinSession, profile, session }) => {
 
@@ -36,7 +36,7 @@ const mapStateToProps = ({profile, session}) => {
 const mapDispatchToProps = dispatch => {
   return {
     onJoinSession: (id, name, session) => {
-      dispatch(new_session(session, null));
+      dispatch(newSession(session, null));
       dispatch(join(id, name));
     }
   };

@@ -18,6 +18,11 @@ class UserVoting extends Component {
       this.setState({data , unitHeight});
     });
   }
+  componentWillUnmount() {
+    const {socket} = this.props;
+    socket.off("STOP_VOTE");
+    socket.off("HANDLE_TALLY");
+  }
   handleVote(ballot) {
     this.setState({ ballot });
   }

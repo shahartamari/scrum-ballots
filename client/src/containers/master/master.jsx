@@ -5,15 +5,15 @@ import * as actions from "../../actions";
 
 class Master extends Component {
   componentWillMount() {
-    const {session, history, profile} = this.props;
+    const { session, history, profile } = this.props;
     // check if we are connected to a session
     // this prevents the user from coming here by typing the URL
-    if (!session || !session.id) {
-      history.replace('/start');
+    if (!session && !session.id) {
+      history.replace("/start");
     }
     // disallow if not logged in
     if (!profile) {
-      history.replace('/');
+      history.replace("/");
     }
   }
   componentDidMount() {
@@ -24,6 +24,10 @@ class Master extends Component {
     socket.emit("STOP_VOTE");
     onReset();
   }
+  componentWillUnmount() {
+    const { socket } = this.props;
+    socket.off("HANDLE_JOIN");
+  }
   startVoting() {
     const { socket } = this.props;
     socket.emit("START_VOTE");
@@ -32,7 +36,7 @@ class Master extends Component {
     const { socket, session, history, onEnd } = this.props;
     socket.emit("END", session.id);
     onEnd();
-    history.push("/start");
+    history.push("/");
   }
   render() {
     const { users, session } = this.props;
@@ -80,8 +84,8 @@ class Master extends Component {
   }
 }
 
-const mapStateToProps = ({ users, session }) => {
-  return { users, session };
+const mapStateToProps = ({ users, session, profile }) => {
+  return { users, session, profile };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -91,7 +95,7 @@ const mapDispatchToProps = dispatch => {
     },
     onReset: () => {
       dispatch(actions.resetVote());
-    }, 
+    },
     onEnd: () => {
       dispatch(actions.reset());
     }
