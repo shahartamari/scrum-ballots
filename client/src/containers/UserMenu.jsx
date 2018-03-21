@@ -3,13 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actions from "../actions";
 
-
-
 class UserMenu extends React.Component {
   constructor(props) {
     super(props);
     props.dispatch(actions.currentUser());
-    this.state = { isAuth: props.profile != null };
+    this.state = { isAuth: false };
   }
   Menu(profile) {
     if (profile) {
@@ -24,13 +22,14 @@ class UserMenu extends React.Component {
     } else {
       return (
         <span>
-          <a href="/api/login" onClick={this.onClick.bind(this)}>Login</a>
+          <a href="/api/login">Login</a>
         </span>
       );
     }
-  };
-  onClick (e) {
-    this.setState({isAuth: true});
+  }
+  componentWillMount() {
+    const { profile } = this.props;
+    this.setState({ isAuth: profile != null });
   }
   componentDidUpdate() {
     const { session, history, dispatch } = this.props;
