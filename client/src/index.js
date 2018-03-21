@@ -6,7 +6,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import scrum from "./reducers";
-import "materialize-css";
+import "materialize-css/dist/js/materialize.min";
 import "materialize-css/dist/css/materialize.min.css";
 import "./css/app.css";
 import { persistStore, persistReducer } from "redux-persist";
