@@ -1,12 +1,12 @@
-const socket = require("socket.io");
+const socketio = require("socket.io");
 const crypto = require("crypto");
 
 module.exports = server => {
   // io socket messages
-  const io = socket(server);
+  const io = socketio(server, {pingInterval:30000});
 
-  io.on("connection", socket => {
-    console.log("socket created");
+  io.on("connection",  socket => {
+    console.log("socket connected");
     socket.on("JOIN", data => {
       if (io.nsps["/"].adapter.rooms[data.session]) {
         socket.join(data.session, () => {
