@@ -9,7 +9,7 @@ import {UserLayout, MasterLayout} from './layout';
 import UserVoting from "./UserVoting";
 import io from "socket.io-client";
 
-const socket = (process.env.NODE_ENV === 'production') ? io() : io(process.env.REACT_APP_SOCKET_SERVER);
+const socket = io(process.env.NODE_ENV === 'production' ? null : 'http://localhost:5000');
 class App extends React.Component {  
  
   render() {   
