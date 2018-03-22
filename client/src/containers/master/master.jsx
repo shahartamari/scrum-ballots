@@ -51,8 +51,8 @@ class Master extends Component {
     });
 
     return (
-      <div>
-        <h1 className="center-align">
+      <div className="grey lighten-3">
+        <h1 className="center-align" style={{marginTop:0, paddingTop:23.5}}>
           {session.id}
         </h1>
         <h3 className="center-align">

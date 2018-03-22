@@ -51,11 +51,11 @@ class Vote extends React.Component {
   }
   render() {
     return (
-      <div className="card">
-        <div className="card-title center-align">
-          <h3>Cast Your Vote</h3>
+      <div className="card center-align">
+        <div className="card-title blue-grey darken-3 white-text">
+          <div className="banner-title">Cast Your Vote</div>
         </div>
-        <div className="card-action">
+        <div className="card-action grey lighten-4">
           {this.renderVotePanel()}
         </div>
       </div>

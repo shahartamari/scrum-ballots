@@ -22,7 +22,7 @@ class UserMenu extends React.Component {
     } else {
       return (
         <span>
-          <a href="/api/login">Login</a>
+          <a href="/login">Login</a>
         </span>
       );
     }

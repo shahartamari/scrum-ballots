@@ -8,11 +8,16 @@
   height: 150px;
   width: 100%;
 }
-.my-deep-orange-fade {  height: 150px;
-  background-color: #f2a06d
+.banner-title {
+  font-size: 30pt;
+  padding: 20px 0;
+  font-weight: 500;
+}
+.my-deep-orange-fade {
+  height: 150px;
+  background-color: #f2a06d;
 }
 .background-grad {
- 
   /* background: linear-gradient(to bottom right, black, #9e9e9e); */
   background: radial-gradient(
     farthest-corner at 90% 98%,
@@ -20,7 +25,6 @@
     #727272,
     #333 40%,
     #f2a06d 60%
-    
   );
 }
 nav ul a {
