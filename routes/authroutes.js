@@ -4,12 +4,11 @@ const keys = require("../config/keys");
 module.exports = app => {
   app.get('/login',
   function(req, res, next) {
-    console.log('trying to authenticate');
+    console.log('start login procdss');
     passport.authenticate('azuread-openidconnect', 
       { 
         response: res,                      // required
-        resourceURL: null,    // optional. Provide a value if you want to specify the resource.
-        customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+        resourceURL: 'https://graph.windows.net',    // optional. Provide a value if you want to specify the resource.
         failureRedirect: '/' 
       }
     )(req, res, next);

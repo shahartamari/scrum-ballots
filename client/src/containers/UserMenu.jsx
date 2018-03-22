@@ -9,8 +9,9 @@ class UserMenu extends React.Component {
     props.dispatch(actions.currentUser());
     this.state = { isAuth: false };
   }
-  Menu(profile) {
-    if (profile) {
+  Menu() {
+    const {profile} = this.props;
+    if (this.state.isAuth) {
       return (
         <a className="dropdown-button" href="#!" data-activates="user-menu">
           <span>
@@ -42,7 +43,7 @@ class UserMenu extends React.Component {
     }
   }
   render() {
-    const { profile, dispatch } = this.props;
+    const { dispatch } = this.props;
 
     return (
       <div>
@@ -58,7 +59,7 @@ class UserMenu extends React.Component {
             </a>
             <ul className="right">
               <li>
-                {this.Menu(profile)}
+                {this.Menu()}
               </li>
             </ul>
           </div>

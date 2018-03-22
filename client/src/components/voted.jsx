@@ -6,16 +6,15 @@ const Voted = ({ socket, userVote,data, unitHeight }) => {
   return (  
 
       <div className="card center-align">
-        <div className="card-title">
+        <div className="card-title blue-grey darken-3 white-text">
           <h2>
             {userVote.name}
           </h2>
         </div>
-        <div className="card-action valign-wrapper" style={{ height: 200 }}>
-          <div className="col s12">
+        <div className="card-action grey lighten-3">
+          <div className="banner-title">
             <div
               className="btn-floating btn-large flat pulse green"
-              style={{ fontSize: 32 }}
             >
               {userVote.vote}
             </div>
