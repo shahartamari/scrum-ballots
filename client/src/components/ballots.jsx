@@ -15,7 +15,7 @@ const BallotList = votes => {
               paddingBottom: 5
             }}
           >
-            {" "}{ballot.vote}
+          {ballot.vote}
           </span>
         </div>
       </div>

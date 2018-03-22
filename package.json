@@ -4,21 +4,18 @@
     "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "express": "^4.16.2",
-
     "express-session": "^1.15.6",
     "method-override": "^2.3.10",
+    "nodemon": "^1.17.2",
     "passport": "^0.4.0",
     "passport-azure-ad": "^3.0.12",
-
-    "nodemon": "^1.17.2",
+    "raw-body": "^2.3.2",
     "react-scripts": "^1.1.1",
-
     "socket.io": "^2.0.4"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "app.js",
-
   "engines": {
     "node": "6.11.4",
     "npm": "5.6.0"
@@ -26,7 +23,6 @@
   "devDependencies": {
     "concurrently": "^3.5.1"
   },
-
   "scripts": {
     "start": "node index.js",
     "dev": "concurrently \"npm run server\" \"npm run start --prefix client\"",

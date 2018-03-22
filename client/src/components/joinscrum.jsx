@@ -62,7 +62,7 @@ class JoinScrum extends Component {
               }}
               required
             />
-            <label htmlFor="nickname">Nickname</label>
+            <label className="active" htmlFor="nickname">Nickname</label>
           </div>
         </div>
         <div className="card-action center-align">

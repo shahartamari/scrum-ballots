@@ -27,8 +27,8 @@ class UserMenu extends React.Component {
       );
     }
   }
-  componentWillMount() {
-    const { profile } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const { profile } = nextProps;
     this.setState({ isAuth: profile != null });
   }
   componentDidUpdate() {
