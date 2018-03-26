@@ -23,13 +23,13 @@ export const resetVote = () => {
   return { type: RESET_VOTES };
 };
 
-export const reset = () => async dispatch => {
-  const res = await axios.get("/api/logout");
-  dispatch({ type: RESET, payload: res.data });
+export const reset = () =>  {
+  return { type: RESET };
 };
 
-export const logout = () => {
-  return { type: LOGOUT };
+export const logout = () => async dispatch => {
+  const res = await axios.get("/api/logout");
+  dispatch( { type: LOGOUT, payload: res.data });
 };
 export const currentUser = () => async dispatch => {
 

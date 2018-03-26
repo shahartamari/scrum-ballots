@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "axios": "^0.18.0",
+    "biguint-format": "^1.0.0",
     "blob-to-base64": "^1.0.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
-    "crypto": "^1.0.1",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "express-auth-parser": "^0.1.2",
     "express-session": "^1.15.6",
     "method-override": "^2.3.10",

@@ -1,4 +1,4 @@
-import { JOIN, NEW_SESSION, RESET } from "../actions/types";
+import { JOIN, NEW_SESSION, RESET, LOGOUT } from "../actions/types";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -11,6 +11,7 @@ export default (state = [], action) => {
       ];
     case RESET:
     case NEW_SESSION:
+    case LOGOUT:
       return []; // clear voter list on new session
 
     default:

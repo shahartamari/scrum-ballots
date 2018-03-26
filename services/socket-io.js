@@ -1,9 +1,10 @@
 const socketio = require("socket.io");
 const crypto = require("crypto");
+const format = require("biguint-format");
 
 module.exports = server => {
   // io socket messages
-  const io = socketio(server, {pingInterval:30000});
+  const io = socketio(server);
 
   io.on("connection",  socket => {
     console.log("socket connected");
@@ -50,7 +51,7 @@ module.exports = server => {
     });
     socket.on("CREATE", () => {
       // generate room number as rand 6 digit number
-      const session = crypto.randomBytes(3).toString("hex");
+      const session = format(crypto.randomBytes(3), 'dec');
       console.log("new session: " + session);
       socket.join(session, () => {
         socket.emit("NEW_SESSION", { session });

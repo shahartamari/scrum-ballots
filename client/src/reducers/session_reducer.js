@@ -5,9 +5,9 @@ export default (state = {}, action) => {
     case NEW_SESSION:     
       return { id: action.session, name: action.name, secret: action.secret };
     case RESET:
-      return { path: action.payload };
+      return { };
     case LOGOUT:
-      return {};
+      return { path: action.payload};
     default:
       return state;
   }

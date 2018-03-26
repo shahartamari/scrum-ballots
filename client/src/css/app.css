@@ -13,6 +13,9 @@
   padding: 20px 0;
   font-weight: 500;
 }
+.banner-img {
+  max-height: 150px;
+}
 .my-deep-orange-fade {
   height: 150px;
   background-color: #f2a06d;

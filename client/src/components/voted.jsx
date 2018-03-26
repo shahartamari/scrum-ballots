@@ -7,9 +7,9 @@ const Voted = ({ socket, userVote,data, unitHeight }) => {
 
       <div className="card center-align">
         <div className="card-title blue-grey darken-3 white-text">
-          <h2>
+          <div className='banner-title'>
             {userVote.name}
-          </h2>
+          </div>
         </div>
         <div className="card-action grey lighten-3">
           <div className="banner-title">

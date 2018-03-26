@@ -7,16 +7,24 @@ import UserImage from "../components/userImage";
 class UserMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { id: null };
     props.dispatch(actions.currentUser());
-    this.state = { isAuth: false };
   }
 
   Menu() {
-    const { profile } = this.props;
-    if (this.state.isAuth) {
+    const { profile, dispatch } = this.props;
+    if (profile !== null) {
       return (
-        <a className="dropdown-button valign-wrapper" data-activates="user-menu">
-         
+        <div>
+         <ul id="user-menu" className="dropdown-content">
+          <li>
+            <a onClick={() => dispatch(actions.logout())}>Logout</a>
+          </li>
+        </ul>
+          <a
+            className="dropdown-button valign-wrapper"
+            data-activates="user-menu"
+          >
             <UserImage
               src={`/api/userPhoto/${profile.upn}`}
               alt={"user"}
@@ -24,14 +32,15 @@ class UserMenu extends React.Component {
               width={32}
               className={"circle left"}
             />
-            <div style={{marginLeft:10}}>
-              <span>
-                {profile.name.givenName + " " + profile.name.familyName}
+            <div style={{ marginLeft: 10 }}>
+              {profile.name.givenName}
+              <span className="hide-on-small-only">
+                {" " + profile.name.familyName}
               </span>
               <i className="material-icons right">arrow_drop_down</i>
             </div>
-         
-        </a>
+          </a>
+        </div>
       );
     } else {
       return (
@@ -41,33 +50,26 @@ class UserMenu extends React.Component {
       );
     }
   }
+
   componentWillReceiveProps(nextProps) {
-    const { profile } = nextProps;
-    this.setState({ isAuth: profile != null });
-  }
-  componentDidUpdate() {
-    const { session, history, dispatch } = this.props;
-    const { path } = session;
-    if (path) {
-      // time to logout
-      this.setState({ isAuth: false });
-      dispatch(actions.logout()); // clear the path
-      history.replace({ pathName: path });
+    const { profile } = nextProps;    
+    if (profile !== nextProps.profile) {
+      this.setState({
+        id: nextProps.profile !== null ? nextProps.profile.sub : null
+      });
     }
   }
-  render() {
-    const { dispatch } = this.props;
+componentDidUpdate(){
+  const { profile } = this.props;    
+  console.log(profile? profile.sub: 'not logged in');
 
+}
+  render() {
     return (
-      <div>
-        <ul id="user-menu" className="dropdown-content">
-          <li>
-            <a onClick={() => dispatch(actions.reset())}>Logout</a>
-          </li>
-        </ul>
+      <div>  
         <nav>
           <div className="nav-wrapper blue-grey darken-3">
-            <a href="#!" className="left" style={{ paddingLeft: 20 }}>
+            <a href="/" className="left" style={{ paddingLeft: 20 }}>
               SCRUM BALLOTS
             </a>
             <ul className="right">

@@ -1,4 +1,4 @@
-import { VOTE, RESET_VOTES, NEW_SESSION, RESET } from "../actions/types";
+import { VOTE, RESET_VOTES, NEW_SESSION, RESET, LOGOUT } from "../actions/types";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -7,6 +7,7 @@ export default (state = [], action) => {
     case RESET_VOTES:
     case NEW_SESSION:
     case RESET:
+    case LOGOUT:
       return [];
     default:
       return state;

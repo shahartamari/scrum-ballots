@@ -26,9 +26,12 @@ module.exports = app => {
 
     try {
       const response = await request(options);
-      res.send(response);
+      res.send(response); 
     } catch (error) {
-      next(error);
+      if (response.statusCode === 401) {
+        res.redirect('/login'); // error with login - need to refresh
+      }
+      next(error); // just send the error back 
     }
   });
 };

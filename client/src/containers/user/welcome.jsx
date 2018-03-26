@@ -38,8 +38,8 @@ class Welcome extends Component {
             </h4>
             <div className="divider" />
             <p>
-              You are participating is scrum session&nbsp;
-              {session ? session.id : ""}. <br />When the Scrum Master starts a
+              You are participating in scrum session&nbsp;
+              {session ? session.name : ""}. <br />When the Scrum Master starts a
               voting round you will be able to cast your vote.
             </p>
           </div>

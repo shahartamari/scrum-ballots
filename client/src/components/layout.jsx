@@ -10,9 +10,10 @@ export const MasterLayout = ({ children, ...rest }) => {
       
         <div className="my-deep-orange-fade banner">
           <img
-            className="responsive-img"
+            className="responsive-img banner-img"
             alt="banner"
             src="image/scrummy.png"
+         
           />
         </div>
 

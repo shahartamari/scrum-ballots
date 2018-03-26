@@ -17,7 +17,7 @@ export default class LazyImage extends React.Component {
         this.setState({ data: response.data, loaded: true });
       })
       .catch(error => {
-        this.stateState({ error: true });
+        this.setState({ error: true });
       });
   }
 
