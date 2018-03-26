@@ -5,7 +5,9 @@ export const MasterLayout = ({ children, ...rest }) => {
   return (
     <div className="container row">
       <div className="col m12 l10">
+  
         <UserMenu />
+      
         <div className="my-deep-orange-fade banner">
           <img
             className="responsive-img"

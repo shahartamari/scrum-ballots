@@ -12,15 +12,17 @@ import "./css/app.css";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
 import { PersistGate } from "redux-persist/integration/react";
-import ReduxThunk from 'redux-thunk';
+import ReduxThunk from "redux-thunk";
 
 const persistConfig = {
   key: "root",
   storage
 };
-const store = createStore(persistReducer(persistConfig, scrum),/* preloadedState, */
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-applyMiddleware(ReduxThunk));
+const store = createStore(
+  persistReducer(persistConfig, scrum) /* preloadedState, */,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // this enables redux tools extension to look at the state tree
+  applyMiddleware(ReduxThunk)
+);
 
 ReactDOM.render(
   <Provider store={store}>

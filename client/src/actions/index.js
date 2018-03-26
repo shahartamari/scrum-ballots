@@ -32,9 +32,10 @@ export const logout = () => {
   return { type: LOGOUT };
 };
 export const currentUser = () => async dispatch => {
+
   const res = await axios.get("/api/getUser");
   dispatch({
-    type: CURRENT_PROFILE,
+    type: CURRENT_PROFILE, 
     profile: res.data === "" ? null : res.data
   });
 };

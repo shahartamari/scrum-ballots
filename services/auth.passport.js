@@ -28,7 +28,6 @@ var users = [];
 var findByOid = function(oid, fn) {
   for (var i = 0, len = users.length; i < len; i++) {
     var user = users[i];
-    console.log("we are using user: ", user);
     if (user.oid === oid) {
       return fn(null, user);
     }
@@ -54,7 +53,6 @@ var findByOid = function(oid, fn) {
 // To do prototype (6), passReqToCallback must be set to true in the config.
 //-----------------------------------------------------------------------------
 passport.use(
-
   new OIDCStrategy(
     {
       identityMetadata: keys.identityMetadata,
@@ -63,30 +61,31 @@ passport.use(
       responseMode: keys.responseMode,
       redirectUrl: keys.url + "/auth/openid/return",
       validateIssuer: true,
-      isB2C: false,
       issuer: keys.url,
       passReqToCallback: false,
       allowHttpForRedirectUrl: keys.allowHttpForRedirectUrl,
       clientSecret: keys.clientSecret,
-      scope: ["email", "profile"],
-      loggingLevel: 'info',
-      useCookieInsteadOfSession: false
+      loggingLevel: "info",
+      scope: ['user_impersonation' ,'openid']
     },
-    function(iss, sub, profile, accessToken, refreshToken, done) {      
+    function(iss, sub, profile, accessToken, refreshToken, done) {
+       // Store token in profile
+       const fullProfile = profile;
+       fullProfile.token = accessToken;
+
       if (!profile.oid) {
         return done(new Error("No oid found"), null);
       }
       // asynchronous verification, for effect...
       process.nextTick(function() {
-         
         findByOid(profile.oid, function(err, user) {
           if (err) {
             return done(err);
           }
           if (!user) {
             // "Auto-registration"
-            users.push(profile);
-            return done(null, profile);
+            users.push(fullProfile);
+            return done(null, fullProfile);
           }
           return done(null, user);
         });

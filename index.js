@@ -1,15 +1,13 @@
 const express = require("express");
-var cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
+const bodyParser = require('body-parser');
 const passport = require("passport");
 
 require("./services/auth.passport");
 
 const app = express();
 app.use(cookieParser());
-//app.use(methodOverride());
 app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
 app.use(bodyParser.urlencoded({ extended : true }));
 

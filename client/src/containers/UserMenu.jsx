@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actions from "../actions";
+import UserImage from "../components/userImage";
 
 class UserMenu extends React.Component {
   constructor(props) {
@@ -9,15 +10,27 @@ class UserMenu extends React.Component {
     props.dispatch(actions.currentUser());
     this.state = { isAuth: false };
   }
+
   Menu() {
-    const {profile} = this.props;
+    const { profile } = this.props;
     if (this.state.isAuth) {
       return (
         <a className="dropdown-button" href="#!" data-activates="user-menu">
-          <span>
-            {profile.name.givenName + " " + profile.name.familyName}
-          </span>
-          <i className="material-icons right">arrow_drop_down</i>
+          <div className="valign-wrapper">
+            <UserImage
+              src={`/api/userPhoto/${profile.upn}`}
+              alt={"user"}
+              height={32}
+              width={32}
+              className={"circle"}
+            />
+            <div className="col m10">
+              <span>
+                {profile.name.givenName + " " + profile.name.familyName}
+              </span>
+              <i className="material-icons right">arrow_drop_down</i>
+            </div>
+          </div>
         </a>
       );
     } else {
