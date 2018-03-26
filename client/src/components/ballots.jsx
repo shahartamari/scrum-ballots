@@ -5,14 +5,16 @@ const BallotList = votes => {
     return (
       <div className="chip z-depth-3" key={ballot.id} style={{ margin: 20 }}>
         <div style={{ fontSize: 14 }}>
-          {ballot.name}{" "}
+         
+          {ballot.name}
           <span
             className="circle blue-grey white-text"
             style={{
               paddingLeft: 8,
               paddingRight: 10,
               paddingTop: 5,
-              paddingBottom: 5
+              paddingBottom: 5,
+              marginLeft: 5
             }}
           >
           {ballot.vote}

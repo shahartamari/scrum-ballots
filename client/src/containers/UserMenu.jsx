@@ -15,22 +15,22 @@ class UserMenu extends React.Component {
     const { profile } = this.props;
     if (this.state.isAuth) {
       return (
-        <a className="dropdown-button" href="#!" data-activates="user-menu">
-          <div className="valign-wrapper">
+        <a className="dropdown-button valign-wrapper" data-activates="user-menu">
+         
             <UserImage
               src={`/api/userPhoto/${profile.upn}`}
               alt={"user"}
               height={32}
               width={32}
-              className={"circle"}
+              className={"circle left"}
             />
-            <div className="col m10">
+            <div style={{marginLeft:10}}>
               <span>
                 {profile.name.givenName + " " + profile.name.familyName}
               </span>
               <i className="material-icons right">arrow_drop_down</i>
             </div>
-          </div>
+         
         </a>
       );
     } else {
