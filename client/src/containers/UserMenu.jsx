@@ -16,11 +16,11 @@ class UserMenu extends React.Component {
     if (profile !== null) {
       return (
         <div>
-         <ul id="user-menu" className="dropdown-content">
-          <li>
-            <a onClick={() => dispatch(actions.logout())}>Logout</a>
-          </li>
-        </ul>
+          <ul id="user-menu" className="dropdown-content">
+            <li>
+              <a onClick={() => dispatch(actions.logout())}>Logout</a>
+            </li>
+          </ul>
           <a
             className="dropdown-button valign-wrapper"
             data-activates="user-menu"
@@ -52,21 +52,24 @@ class UserMenu extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { profile } = nextProps;    
+    const { profile } = nextProps;
     if (profile !== nextProps.profile) {
       this.setState({
         id: nextProps.profile !== null ? nextProps.profile.sub : null
       });
     }
   }
-componentDidUpdate(){
-  const { profile } = this.props;    
-  console.log(profile? profile.sub: 'not logged in');
-
-}
+  componentDidMount() {
+    const { profile } = this.props;
+    console.log(profile ? profile.sub : "not logged in");
+  }
+  componentDidUpdate() {
+    const { profile } = this.props;
+    console.log(profile ? profile.sub : "not logged in");
+  }
   render() {
     return (
-      <div>  
+      <div>
         <nav>
           <div className="nav-wrapper blue-grey darken-3">
             <a href="/" className="left" style={{ paddingLeft: 20 }}>

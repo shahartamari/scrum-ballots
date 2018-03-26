@@ -7,10 +7,9 @@ export default (state = [], action) => {
         ...state.filter(user => {
           return user.id !== action.id;
         }),
-        action
+        {id: action.id, name: action.name}
       ];
-    case RESET:
-    case NEW_SESSION:
+    case RESET:  
     case LOGOUT:
       return []; // clear voter list on new session
 

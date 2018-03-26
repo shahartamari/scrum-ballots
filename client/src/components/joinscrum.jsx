@@ -7,13 +7,17 @@ class JoinScrum extends Component {
     const { history, socket } = this.props;
     const self = this;
     this.state = {
+      id:  Math.random().toString(36).substring(2) + new Date().getTime().toString(36),
       user: "",
       session: "",
       errorMessage: ""
     };
 
-    socket.on("WELCOME", () => {
-      history.push("/scrum");
+    socket.on("WELCOME", (id, session) => {
+      if (id === this.state.id) {
+        this.props.handleWelcome(session);
+        history.push("/scrum");
+      }
     });
     socket.on("JOIN_FAILED", function(data) {
       self.setState({ errorMessage: data.description });
@@ -23,7 +27,8 @@ class JoinScrum extends Component {
     const { profile } = this.props;
 
     if (profile && profile.name) {
-      const displayName = `${profile.name.givenName} ${profile.name.familyName}`;
+      const displayName = `${profile.name.givenName} ${profile.name
+        .familyName}`;
       if (displayName !== this.state.user) {
         this.setState({ user: displayName });
       }
@@ -31,7 +36,8 @@ class JoinScrum extends Component {
   }
 
   onJoinClick() {
-    this.props.handleJoin(this.state.user, this.state.session); // push join user action
+    const {id, user, session} = this.state;
+    this.props.handleJoin(id, user, session); // push join user action
   }
   render() {
     return (
@@ -62,7 +68,9 @@ class JoinScrum extends Component {
               }}
               required
             />
-            <label className="active" htmlFor="nickname">Nickname</label>
+            <label className="active" htmlFor="nickname">
+              Nickname
+            </label>
           </div>
         </div>
         <div className="card-action center-align">

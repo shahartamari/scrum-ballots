@@ -17,8 +17,9 @@ class Master extends Component {
     }
   }
   componentDidMount() {
-    const { socket, onJoin, onReset } = this.props;
+    const { socket, onJoin, onReset, session } = this.props;
     socket.on("HANDLE_JOIN", data => {
+      socket.emit("WELCOME", {id: data.id, session});
       onJoin(data.id, data.name);
     });
     socket.emit("STOP_VOTE");

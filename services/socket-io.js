@@ -10,8 +10,7 @@ module.exports = server => {
     console.log("socket connected");
     socket.on("JOIN", data => {
       if (io.nsps["/"].adapter.rooms[data.session]) {
-        socket.join(data.session, () => {
-          socket.emit("WELCOME");
+        socket.join(data.session, () => {         
           socket.broadcast.emit("HANDLE_JOIN", {
             id: data.id,
             name: data.name
@@ -27,6 +26,7 @@ module.exports = server => {
         );
       }
     });
+
     socket.on("LEAVE", data => {
       console.log(data.user.name + " is leaving session " + data.session);
       socket.leave(data.session);
@@ -38,6 +38,9 @@ module.exports = server => {
       socket.broadcast.emit("HANDLE_VOTE", data);
       console.log(data.name + " voted " + data.vote);
     });
+    socket.on("WELCOME", data => {
+      socket.broadcast.emit("WELCOME", data.id, data.session)
+    })
     socket.on("START_VOTE", data => {
       socket.broadcast.emit("START");
     });
