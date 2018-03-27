@@ -36,3 +36,10 @@ nav ul a {
 .btn-flat {
   color: #039be5;
 }
+.escape-banner { 
+  margin: 10px 15px 0;  
+  background-color: #f2a06d;
+}
+.escape-banner:hover {
+  background-color: #ff7043;
+}

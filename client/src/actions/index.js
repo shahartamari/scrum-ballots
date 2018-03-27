@@ -5,6 +5,7 @@ import {
   VOTE,
   NEW_SESSION,
   RESET_VOTES,
+  CLEAR_USERS,
   RESET,
   CURRENT_PROFILE,
   LOGOUT
@@ -22,7 +23,9 @@ export const newSession = (session, name, secret) => {
 export const resetVote = () => {
   return { type: RESET_VOTES };
 };
-
+export const clearUsers = () => {
+  return {type: CLEAR_USERS};
+}
 export const reset = () =>  {
   return { type: RESET };
 };

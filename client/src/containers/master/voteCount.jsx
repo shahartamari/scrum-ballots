@@ -27,7 +27,7 @@ class VoteCount extends Component {
           }).length;
         })
       : new Array(8).join("0").split("").map(parseFloat);  
-      socket.emit("TALLY", {data, unitHeight: users.length});
+      socket.emit("TALLY", {data, unitHeight: users.length, room: session.id});
     return (
       <div>
         <div className="card center-align">

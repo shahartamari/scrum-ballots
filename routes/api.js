@@ -10,7 +10,7 @@ module.exports = app => {
     res.send(req.user);
   });
   app.get("/api/userPhoto/:id", EnsureLogin, async (req, res, next) => {
-      const options = {
+    const options = {
       url: `${baseUrl}/users/${req.params.id}/thumbnailPhoto?${apiVersion}`,
       method: "GET",
       json: false,
@@ -21,17 +21,17 @@ module.exports = app => {
         const img = new Buffer(body.toString(), "binary").toString("base64");
         return `data:image/jpg;base64,${img}`;
       },
-      encoding: 'binary'
+      encoding: "binary"
     };
 
     try {
       const response = await request(options);
-      res.send(response); 
+      res.send(response);
     } catch (error) {
-      if (response.statusCode === 401) {
-        res.redirect('/login'); // error with login - need to refresh
+      if(error.StatusCodeError === 401) {
+      res.redirect("/login"); // error with login - need to refresh
       }
-      next(error); // just send the error back 
+      return next(error.message);
     }
   });
 };

@@ -42,10 +42,10 @@ class Vote extends React.Component {
   }
 
   castVote(vote) {
-    const { socket, broadcastVote, onVote, user } = this.props;
+    const { socket, broadcastVote, onVote, user, session } = this.props;
     const ballot = { ...user, vote };
 
-    socket.emit("VOTE", ballot); // submit vote to session
+    socket.emit("VOTE", {ballot, room: session.id}); // submit vote to session
     broadcastVote(ballot); // react to casted vote
     onVote(ballot); // update the user store
   }

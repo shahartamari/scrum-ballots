@@ -18,24 +18,38 @@ class Master extends Component {
   }
   componentDidMount() {
     const { socket, onJoin, onReset, session } = this.props;
+    // a user requested to join the session
+    // add the user to store after sending them a welcome message
     socket.on("HANDLE_JOIN", data => {
-      socket.emit("WELCOME", {id: data.id, session});
-      onJoin(data.id, data.name);
+      socket.emit("WELCOME", { id: data.id, session });
+      onJoin(data.id, data.name); // send welcome message
+
     });
-    socket.emit("STOP_VOTE");
-    onReset();
+    // this is returend from each user that is still alive
+    socket.on("PONG", data => {   
+      onJoin(data.id, data.name);  // add the connected user to the store      
+    })
+
+    socket.emit("STOP_VOTE", session.id); // ask all screens to turn back to welcome screen
+    onReset(); // clear store from old votes and from all current users
+    
+    // all connected users should reply to the PING message to be added back
+    socket.emit("PING", session.id); // start a ping session 
+
   }
   componentWillUnmount() {
+    // make sure to stop listening to avoid multiple event firings
     const { socket } = this.props;
-    socket.off("HANDLE_JOIN");
+    socket.off("HANDLE_JOIN"); 
+    socket.off("PONG");
   }
   startVoting() {
-    const { socket } = this.props;
-    socket.emit("START_VOTE");
+    const { socket, session } = this.props;
+    socket.emit("START_VOTE", session.id); // turn all connected users to VOTE screen
   }
   endSession() {
     const { socket, session, history, onEnd } = this.props;
-    socket.emit("END", session.id);
+    socket.emit("END", session.id); // end current session and log off
     onEnd();
     history.push("/");
   }
@@ -53,7 +67,7 @@ class Master extends Component {
 
     return (
       <div className="grey lighten-3">
-        <h1 className="center-align" style={{marginTop:0, paddingTop:23.5}}>
+        <h1 className="center-align" style={{ marginTop: 0, paddingTop: 23.5 }}>
           {session.id}
         </h1>
         <h3 className="center-align">
@@ -94,7 +108,8 @@ const mapDispatchToProps = dispatch => {
     onJoin: (id, name) => {
       dispatch(actions.join(id, name));
     },
-    onReset: () => {
+    onReset: () => { 
+      dispatch(actions.clearUsers());
       dispatch(actions.resetVote());
     },
     onEnd: () => {

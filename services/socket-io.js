@@ -4,14 +4,15 @@ const format = require("biguint-format");
 
 module.exports = server => {
   // io socket messages
-  const io = socketio(server);
+  const io = socketio(server, {pingInterval: 20000, pingTimeout:10000});
 
   io.on("connection",  socket => {
     console.log("socket connected");
+    // user is asking to join a room
     socket.on("JOIN", data => {
       if (io.nsps["/"].adapter.rooms[data.session]) {
         socket.join(data.session, () => {         
-          socket.broadcast.emit("HANDLE_JOIN", {
+          io.in(data.session).emit("HANDLE_JOIN", {
             id: data.id,
             name: data.name
           }); // let the others know that a user joined
@@ -27,29 +28,31 @@ module.exports = server => {
       }
     });
 
+    // user is asking to leave a room
     socket.on("LEAVE", data => {
       console.log(data.user.name + " is leaving session " + data.session);
       socket.leave(data.session);
     });
     socket.on("TALLY", data => {
-      socket.broadcast.emit("HANDLE_TALLY", data);
+      io.in(data.room).emit("HANDLE_TALLY", data);
     });
     socket.on("VOTE", data => {
-      socket.broadcast.emit("HANDLE_VOTE", data);
-      console.log(data.name + " voted " + data.vote);
+      io.in(data.room).emit("HANDLE_VOTE", data.ballot);
+      console.log(data.ballot.name + " voted " + data.ballot.vote);
     });
     socket.on("WELCOME", data => {
-      socket.broadcast.emit("WELCOME", data.id, data.session)
+      io.in(data.session.id).emit("WELCOME", data.id, data.session)
     })
-    socket.on("START_VOTE", data => {
-      socket.broadcast.emit("START");
+    socket.on("START_VOTE", room => {
+      io.in(room).emit("START");
     });
-    socket.on("STOP_VOTE", () => {
-      socket.broadcast.emit("STOP_VOTE"); // send voters back to welcome screen
+    socket.on("STOP_VOTE", (room) => {
+      io.in(room).emit("STOP_VOTE"); // send voters back to welcome screen
     });
+    // end session and force logout everyone    
     socket.on("END", session => {
       console.log("ending session " + session);
-      socket.broadcast.emit("END_SESSION", session);
+      io.in(session).emit("END_SESSION", session);
       socket.leave(session);
     });
     socket.on("CREATE", () => {
@@ -60,5 +63,13 @@ module.exports = server => {
         socket.emit("NEW_SESSION", { session });
       });
     });
+    // start a check alive session for all users in the room
+    socket.on("PING", (room) => {
+      io.in(room).emit("PING");
+    });
+    // answer is coming back from connected active session
+    socket.on("PONG", data => {
+      io.in(data.room).emit("PONG", {id: data.user.id, name: data.user.name}); // this is answered by master 
+    })
   });
 };

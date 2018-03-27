@@ -5,6 +5,7 @@ import Master from "../containers/master/master";
 import Home from "../containers/home";
 import VoteCount from "../containers/master/voteCount";
 import NewScrum from '../containers/master/newscrum';
+import Leave from '../containers/user/leave';
 import {UserLayout, MasterLayout} from './layout';
 import UserVoting from "./UserVoting";
 import io from "socket.io-client";
@@ -22,6 +23,7 @@ class App extends React.Component {
         
         <Route path="/scrum" render={(routeProps)=><UserLayout><Welcome {...routeProps} socket={socket}/></UserLayout>} />
         <Route path="/vote" render={(routeProps)=><UserLayout><UserVoting {...routeProps} socket={socket}/></UserLayout>}  />
+        <Route path="/leave" render={(routeProps)=><Leave {...routeProps} socket={socket}/>}  />
       </Switch>
     );
   }
