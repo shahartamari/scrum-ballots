@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------------------------
+// display a voting panel to the user
+// when the user clicks on a button the vote signal is sent to Socket IO
+// which transmits it back to the Vote Count screen to add to tally
+//-----------------------------------------------------------------------------------------------------
+
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";

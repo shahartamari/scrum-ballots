@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------------------------
+// The Home screen allows user to either join a session or start their own session
+// if the user was disconnected from a previous session, then a link allows them
+// to return back into the session
+//-----------------------------------------------------------------------------------------------------
+
 import React from "react";
 import JoinScrum from "../components/joinscrum";
 import { connect } from "react-redux";

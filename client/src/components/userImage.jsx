@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------------------------------
+// lazy-load image from server call to Azure graph
+//-----------------------------------------------------------------------------------------------------
+
 import axios from "axios";
 import React from 'react';
 
@@ -28,7 +32,7 @@ export default class LazyImage extends React.Component {
   render() {
     if (this.state.error) {
       return (
-        <span />
+        <i className="material-icons red">error</i>
       );
     } else if (!this.state.loaded) {
       return (

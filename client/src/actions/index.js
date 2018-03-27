@@ -29,13 +29,12 @@ export const clearUsers = () => {
 export const reset = () =>  {
   return { type: RESET };
 };
-
+// we are using react-thunk to allow async responses
 export const logout = () => async dispatch => {
   const res = await axios.get("/api/logout");
   dispatch( { type: LOGOUT, payload: res.data });
 };
 export const currentUser = () => async dispatch => {
-
   const res = await axios.get("/api/getUser");
   dispatch({
     type: CURRENT_PROFILE, 

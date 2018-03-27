@@ -1,3 +1,10 @@
+//-----------------------------------------------------------------------------------------------------
+// this component handles scrum master creating a new scrum session
+// it only allows connected users (profile != null) to enter
+// The Scrum Master fills out the form and clicks on New Scrum Session
+// button to create the session 
+//-----------------------------------------------------------------------------------------------------
+
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -6,7 +13,6 @@ import { newSession } from "../../actions";
 class NewScrum extends Component {
   constructor(props) {
     super(props);
-
     this.state = { name: "", secret: false };
   }
   componentWillMount() {

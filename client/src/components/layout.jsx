@@ -1,12 +1,16 @@
+//-----------------------------------------------------------------------------------------------------
+// wrappers for screens. Maintain a consistent look for all screens in the application
+//-----------------------------------------------------------------------------------------------------
+
 import React from "react";
-import UserMenu from "../containers/UserMenu";
+import Navbar from "../containers/Navbar";
 import { Link } from "react-router-dom";
 
 export const MasterLayout = ({ children, ...rest }) => {
   return (
     <div className="container row">
       <div className="col m12 l10">
-        <UserMenu />
+        <Navbar />
 
         <div className="my-deep-orange-fade banner">
           <img

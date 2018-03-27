@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------------------------------
+// the User Voting loads either the Vote or Voted component
+// depends on a signal sent by the scrum master and transmitted by Socket IO
+//-----------------------------------------------------------------------------------------------------
+
 import React, { Component } from "react";
 import {withRouter} from 'react-router';
 import Vote from "../containers/user/vote";

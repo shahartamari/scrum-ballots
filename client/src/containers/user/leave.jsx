@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------------------------
+// this components routes to a leave requst
+// it signals to Socket IO to leave the room, clears the store 
+// and redirects back to home page
+//-----------------------------------------------------------------------------------------------------
+
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";

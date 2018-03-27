@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------------------------------
+// Welcome component is where the user sees when they are not voting
+// it provides a short message and handles life-cycle events
+//-----------------------------------------------------------------------------------------------------
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -31,8 +35,7 @@ class Welcome extends Component {
   }
 
   render() {
-    const { user, session } = this.props;
-    console.log(user ? user.name : "user is unknown");
+    const { user, session } = this.props; 
     return (
       <div className="container">
         <div className="card blue-grey white-text">

@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------------------------------
+// this component allows a user to join a scrum session
+// the user needs to know the scrum session number.
+// the user can choose a nickname, or log in and join as his own full display name
+//-----------------------------------------------------------------------------------------------------
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
@@ -12,13 +17,15 @@ class JoinScrum extends Component {
       session: "",
       errorMessage: ""
     };
-
+    // when we get a welcom message we add the user to the store and move on to Welcome screen
     socket.on("WELCOME", (id, session) => {
       if (id === this.state.id) {
+        this.setState({errorMessage: ""});
         this.props.handleWelcome(session);
         history.push("/scrum");
       }
     });
+    // if we failed to join, we show an error message
     socket.on("JOIN_FAILED", function(data) {
       self.setState({ errorMessage: data.description });
     });
@@ -27,10 +34,10 @@ class JoinScrum extends Component {
     const { profile } = this.props;
 
     if (profile && profile.name) {
-      const displayName = `${profile.name.givenName} ${profile.name
-        .familyName}`;
+      const displayName = `${profile.name.givenName} ${profile.name.familyName}`;
       if (displayName !== this.state.user) {
-        this.setState({ user: displayName });
+        this.setState({ user: displayName }); // fix the state to display name for logged on user
+        // if they try and change it, the update process will set it back and ignore their typing
       }
     }
   }

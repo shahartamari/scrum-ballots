@@ -1,18 +1,17 @@
+//-----------------------------------------------------------------------------------------
+// draw a canvass to represent vote count
+// we try to give the canvass enough room to expand upwards
+//-----------------------------------------------------------------------------------------
+
 import React, { Component } from "react";
 
-class BarChart extends Component {
+export default class BarChart extends Component {
   constructor(props) {
     super(props);
     this.graph = {};
-  
   }
   componentDidMount() {
-    const { config, height, width } = this.getConfig();
-    this.graph = {
-      width,
-      height,
-      config
-    };
+    this.graph = this.getConfig();
 
     this.context = this.refs.canvas.getContext("2d");
     this.updateCanvas();
@@ -133,7 +132,7 @@ class BarChart extends Component {
           "#00e676"
         ]
       },
-      height:  (4 + unitHeight) * baseWidth/3 * 1.4,
+      height: (4 + unitHeight / 2) * baseWidth / 3 * 1.4,
       width: parentWidth - baseWidth * 1.2
     };
   }
@@ -145,6 +144,3 @@ class BarChart extends Component {
     );
   }
 }
-
-
-export default BarChart;

@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------------------------
+// the Master screen is the main screen for the Scrum master
+// it contains a list all connected users and handles signals
+// from Socket IO to handle user joining and leaving
+//-----------------------------------------------------------------------------------------------------
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";

@@ -43,3 +43,7 @@ nav ul a {
 .escape-banner:hover {
   background-color: #ff7043;
 }
+.vote-count {
+  padding: 5px 10px 5px 5px;
+  margin-left: 5px;
+}

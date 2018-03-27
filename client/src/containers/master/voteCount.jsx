@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------------------------------
+// The Vote count screen shows the ballot comonent as user vote on a question
+// and a vote tally chart with user votes
+//-----------------------------------------------------------------------------------------------------
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
@@ -36,7 +40,7 @@ class VoteCount extends Component {
             </span></div>
           <div className="card-content" ref="parent" />
          
-          {session.hiddenBallots ? <span /> : <Ballots votes={votes} />}
+          {session.hiddenBallots ? <span /> : <Ballots votes={votes} /> /* hide if user chose secret ballots*/} 
           <BarChart
             width={500}
             unitHeight= {users.length}

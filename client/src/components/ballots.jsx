@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------------------
+// show a list of users and their vote count
+// this list is displayed for open ballot on the VoteCount screen
+//-----------------------------------------------------------------------------------------
+
 import React from "react";
 
 const BallotList = votes => {
@@ -5,19 +10,9 @@ const BallotList = votes => {
     return (
       <div className="chip z-depth-3" key={ballot.id} style={{ margin: 20 }}>
         <div style={{ fontSize: 14 }}>
-         
           {ballot.name}
-          <span
-            className="circle blue-grey white-text"
-            style={{
-              paddingLeft: 8,
-              paddingRight: 10,
-              paddingTop: 5,
-              paddingBottom: 5,
-              marginLeft: 5
-            }}
-          >
-          {ballot.vote}
+          <span className="circle blue-grey white-text vote-count">
+            {ballot.vote}
           </span>
         </div>
       </div>
