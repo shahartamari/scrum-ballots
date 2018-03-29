@@ -8,7 +8,7 @@ require("./services/auth.passport");
 
 const app = express();
 app.use(cookieParser());
-app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
+app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 app.use(bodyParser.urlencoded({ extended : true }));
 
 app.use(passport.initialize());

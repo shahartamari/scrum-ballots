@@ -48,7 +48,8 @@ module.exports = app => {
   app.get("/api/logout", function(req, res) {
     req.session.destroy(function(err) {
       req.logOut();
-      res.send(
+      req.session = null;
+      return res.send(
         "https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=" +
           keys.url
       );

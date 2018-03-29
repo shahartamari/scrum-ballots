@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------------------------------
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { resetVote, reset } from "../../actions";
 
 class Welcome extends Component {
@@ -35,21 +35,34 @@ class Welcome extends Component {
   }
 
   render() {
-    const { user, session } = this.props; 
+    const { user, session } = this.props;
     return (
       <div className="container">
+     
         <div className="card blue-grey white-text">
-          <span className="card-title" />
+        
+          <div className="card-title" >  </div>
           <div className="card-content flow-text">
-            <h4 className="">
+            <h4>
               Welcome {user ? user.name : `<unknown>`}
             </h4>
+         
             <div className="divider" />
             <p>
               You are participating in &nbsp;
               {session ? session.name : ""}. <br />When the Scrum Master starts
               a voting round you will be able to cast your vote.
             </p>
+            <Link
+              to="/leave"
+              className="btn-floating btn-small escape-banner right"
+              title="leave session"
+            >
+              <i className="material-icons">exit_to_app</i>
+            </Link>
+          </div>
+          <div className="card-action">
+            
           </div>
         </div>
       </div>
