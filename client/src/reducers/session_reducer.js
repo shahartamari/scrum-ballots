@@ -7,7 +7,7 @@ export default (state = {}, action) => {
     case RESET:
       return { };
     case LOGOUT:
-      return { path: action.payload};
+      return { };
     default:
       return state;
   }

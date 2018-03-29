@@ -47,3 +47,16 @@ nav ul a {
   padding: 5px 10px 5px 5px;
   margin-left: 5px;
 }
+
+.nav-wrapper {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.nav-wrapper ul > li {
+  vertical-align: middle;
+  padding: 0 5px;
+  display: inline-block;
+}
+.nav-wrapper ul > li > img {
+  vertical-align: middle;
+}

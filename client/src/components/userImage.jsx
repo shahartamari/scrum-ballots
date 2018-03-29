@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------------------------------
 
 import axios from "axios";
-import React from 'react';
+import React from "react";
 
 export default class LazyImage extends React.Component {
   constructor(props) {
@@ -30,23 +30,36 @@ export default class LazyImage extends React.Component {
   }
 
   render() {
+    const { className, style, alt, height, width, title } = this.props;
     if (this.state.error) {
       return (
-        <i className="material-icons red">error</i>
+        <div className={className}>
+          <i className="material-icons" style={{ fontSize: 40 }}>
+            error
+          </i>
+        </div>
       );
     } else if (!this.state.loaded) {
       return (
-        <span />
+        <img
+          className={className}
+          style={style}
+          src={"image/empty.png"}
+          alt={alt}
+          height={height}
+          width={width}
+        />
       );
     }
     return (
       <img
-        className={this.props.className}
-        style={this.props.style}
+        className={className}
+        style={style}
         src={this.state.data}
-        alt={this.props.alt}
-        height = {this.props.height}
-        width = {this.props.width}
+        alt={alt}
+        height={height}
+        width={width}
+        title={title}
       />
     );
   }

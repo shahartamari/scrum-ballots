@@ -1,59 +1,43 @@
-import React from "react";
+import React, {Component} from "react";
 import UserImage from "./userImage";
-import axios from "axios";
-export default class Menu extends React.Component {
+
+
+export default class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      error: false,
-      profile: null
+      loading: false
     };
-  }
-  async getProfile() {
-    try {
-      const res = await axios.get("/api/getUser");
-      if (res.data !== "") {
-        this.setState({ profile: res.data });
-      }
-    } catch (e) {
-      this.setState({ error: true });
-    }
-  }
-  componentDidMount() {
-    this.getProfile();
-  }
+    
+  }  
   render() {
-    const { profile } = this.state;
-    if (profile !== null) {
+    const { profile } = this.props;
+    
+    if (profile) {
       return (
-        <div style={{ margin: 10, minWidth: 200 }}>
-          <a
-            className="btn-floating"
-            title="Logout"
-            onClick={this.props.onLogout}
-          >
+        <ul>
+          <li>
             <UserImage
               src={`/api/userPhoto/${profile.upn}`}
               alt={"user"}
               height={40}
               width={40}
-              className={"circle left"}
+              className={"circle "}
+              title={`${profile.name.givenName} ${profile.name.familyName}`}
             />
-          </a>
+          </li>
 
-          <div className="right">
-            {profile.name.givenName}
-            <span className="hide-on-small-only">
-              {" " + profile.name.familyName}
-            </span>
-          </div>
-        </div>
+          <li style={{ maxHeight: 64 }}>
+            <a href="#!" onClick={this.props.onLogout} title="logout">
+              <i className="material-icons right medium">exit_to_app</i>
+            </a>
+          </li>
+        </ul>
       );
     } else {
       return (
         <span>
-          <a href="/login">Login</a>
+          <a href="/login" onClick={()=> {this.setState({loading: true})}}>Login</a>
         </span>
       );
     }

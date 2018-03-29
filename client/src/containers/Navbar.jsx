@@ -5,43 +5,29 @@
 //-----------------------------------------------------------------------------------------------------
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import * as actions from "../actions";
 import Menu from "../components/menu";
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { id: null };
-    props.dispatch(actions.currentUser());
-  }
+const Navbar = ({ logout, profile, currentUser }) => {
+  currentUser(); // current user action is passed through the state2props function
   
-  handleLogout() {
-    const { dispatch } = this.props;
-    dispatch(actions.logout())
-    this.forceUpdate();
-  }
-  render() {    
-    return (
-      <div>
-        <nav>
-          <div className="nav-wrapper blue-grey darken-3">
-            <a href="/" className="left" style={{ paddingLeft: 20 }}>
-              SCRUM BALLOTS
-            </a>
-            <ul className="right">
-              <li>
-                <Menu onLogout={this.handleLogout.bind(this)} />
-              </li>
-            </ul>
+  return (
+    <div>
+      <nav>
+        <div className="nav-wrapper blue-grey darken-3">
+          <a href="/" className="left">
+            SCRUM BALLOTS
+          </a>
+          <div className="right">
+            <Menu onLogout={logout} profile={profile} />
           </div>
-        </nav>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = ({ session }) => {
-  return { session };
+        </div>
+      </nav>
+    </div>
+  );
 };
-export default withRouter(connect(mapStateToProps)(Navbar));
+
+const mapStateToProps = ({ profile }) => {
+  return { profile };
+};
+export default connect(mapStateToProps, actions)(Navbar);
