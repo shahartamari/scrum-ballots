@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
 
-const Home = ({ socket, onJoin, onNewSession, profile, session }) => {
+const Home = ({ socket, onJoin, onNewSession, profile, session, user }) => {
   function joinSession(id, name, session) {
     socket.emit("JOIN", {
       id,
@@ -23,7 +23,7 @@ const Home = ({ socket, onJoin, onNewSession, profile, session }) => {
     onNewSession(session);
   }
   const disabled = profile ? "" : "disabled";
-
+  console.log(user);
   return (
     <div>
       <JoinScrum
@@ -39,15 +39,27 @@ const Home = ({ socket, onJoin, onNewSession, profile, session }) => {
           </Link>
         </div>
 
-        <Link to="/scrum" className={session.id ? "right" : "hide"}>
-          <span className="left">Resume Session</span> <i className="material-icons">restore</i>
+        <Link
+          to="/scrum"
+          onClick={() =>{
+            console.log(user);
+            joinSession(
+              user.id,
+              user.name,
+              session.id
+            )}
+          }
+          className={session.id && user ? "right" : "hide"}
+        >
+          <span className="left">Resume Session</span>{" "}
+          <i className="material-icons">restore</i>
         </Link>
       </div>
     </div>
   );
 };
-const mapStateToProps = ({ profile, session }) => {
-  return { profile, session };
+const mapStateToProps = ({ profile, session, users }) => {
+  return { profile, session, user: users.length > 0 ? users[0] : null };
 };
 const mapDispatchToProps = dispatch => {
   return {

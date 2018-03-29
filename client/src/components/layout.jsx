@@ -4,7 +4,6 @@
 
 import React from "react";
 import Navbar from "../containers/Navbar";
-import { Link } from "react-router-dom";
 
 export const MasterLayout = ({ children, ...rest }) => {
   return (

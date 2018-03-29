@@ -26,16 +26,14 @@ class Navbar extends React.Component {
       history.push("/login");
     }
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+  componentWillReceiveProps(nextProps) {    
     const { profile } = nextProps;
     this.setState({ loading: profile === null, profile });
   }
   render() {
     const { logout } = this.props;
     const { profile } = this.state;
-    console.log("render: ");
-    console.log(profile);
+  
     return (
       <div>
         <nav>

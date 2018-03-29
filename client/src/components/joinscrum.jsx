@@ -20,7 +20,7 @@ class JoinScrum extends Component {
     // when we get a welcom message we add the user to the store and move on to Welcome screen
     socket.on("WELCOME", (id, session) => {
       if (id === this.state.id) {
-        this.setState({errorMessage: ""});
+    
         this.props.handleWelcome(session);
         history.push("/scrum");
       }
@@ -43,6 +43,7 @@ class JoinScrum extends Component {
   }
 
   onJoinClick() {
+    this.setState({errorMessage: ""});
     const {id, user, session} = this.state;
     this.props.handleJoin(id, user, session); // push join user action
   }
