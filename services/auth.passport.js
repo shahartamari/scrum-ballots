@@ -85,9 +85,12 @@ passport.use(
           if (!user) {
             // "Auto-registration"
             users.push(fullProfile);
-            return done(null, fullProfile);
+            
+          } else {
+            // refresh the token
+            users[users.indexOf(user)] = fullProfile;
           }
-          return done(null, user);
+          return done(null, fullProfile);
         });
       });
     }
