@@ -22,11 +22,7 @@ const BallotList = votes => {
 const Ballots = ({ votes }) => {
   return (
     <div className="container left-align">
-      {BallotList(
-        votes.map(e => {
-          return e.voteCast;
-        })
-      )}
+      {BallotList(votes)}
     </div>
   );
 };

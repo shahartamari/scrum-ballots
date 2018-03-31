@@ -27,7 +27,7 @@ class VoteCount extends Component {
     const data = votes
       ? labels.map(e => {
           return votes.filter(v => {
-            return v.voteCast.vote === e;
+            return v.vote === e;
           }).length;
         })
       : new Array(8).join("0").split("").map(parseFloat);  

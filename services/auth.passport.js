@@ -66,12 +66,12 @@ passport.use(
       allowHttpForRedirectUrl: keys.allowHttpForRedirectUrl,
       clientSecret: keys.clientSecret,
       loggingLevel: "info",
-      scope: ['user_impersonation' ,'openid']
+      scope: ["user_impersonation", "openid"]
     },
     function(iss, sub, profile, accessToken, refreshToken, done) {
-       // Store token in profile
-       const fullProfile = profile;
-       fullProfile.token = accessToken;
+      // Store token in profile
+      const fullProfile = profile;
+      fullProfile.token = accessToken;
 
       if (!profile.oid) {
         return done(new Error("No oid found"), null);
@@ -85,7 +85,6 @@ passport.use(
           if (!user) {
             // "Auto-registration"
             users.push(fullProfile);
-            
           } else {
             // refresh the token
             users[users.indexOf(user)] = fullProfile;
